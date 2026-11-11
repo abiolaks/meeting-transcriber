@@ -12,6 +12,7 @@ from pathlib import Path
 from . import note as note_module
 from .asr import ASRError, transcribe
 from .llama_cpp import LlamaCppLLM
+from .merge import MergeError, merge
 from .llm import FakeLLM
 from .render import render
 from .transcript import TranscriptError, load
@@ -44,7 +45,17 @@ def _build_parser() -> argparse.ArgumentParser:
     tr.add_argument("--threads", type=int, default=None, help="default: cores - 1")
     tr.add_argument("--channel", default="ch0", help="channel id written to the transcript")
     tr.add_argument("--label", default="You", help="speaker label for this channel")
+
+    mg = sub.add_parser("merge", help="merge per-channel transcripts onto one timeline")
+    mg.add_argument("transcripts", nargs="+", help="one transcript JSON per channel")
+    mg.add_argument("--out", required=True, help="output JSON path")
+    mg.add_argument("--mic-channel", default="ch0",
+                    help="channel id carrying your microphone; its echo copies are dropped")
     return parser
+
+
+def _write_transcript(path: Path, transcript) -> None:
+    _write_atomically(path, json.dumps(transcript.to_dict(), indent=2) + "\n")
 
 
 def _write_atomically(path: Path, text: str) -> None:
@@ -66,7 +77,7 @@ def _transcribe(args: argparse.Namespace) -> int:
         return 2
 
     out = Path(args.out) if args.out else Path(args.audio).with_suffix(".json")
-    _write_atomically(out, json.dumps(result.transcript.to_dict(), indent=2) + "\n")
+    _write_transcript(out, result.transcript)
 
     print(
         f"{result.transcript.meeting.title}: {len(result.transcript.segments)} segments, "
@@ -76,11 +87,37 @@ def _transcribe(args: argparse.Namespace) -> int:
     return 0
 
 
+def _merge(args: argparse.Namespace) -> int:
+    try:
+        transcripts = [load(path) for path in args.transcripts]
+        result = merge(transcripts, mic_channel=args.mic_channel)
+    except (MergeError, TranscriptError, FileNotFoundError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
+    out = Path(args.out)
+    _write_transcript(out, result.transcript)
+    print(
+        f"merged {len(transcripts)} channels: {len(result.transcript.segments)} segments, "
+        f"{result.echoes_removed} echoes removed -> {out}"
+    )
+    if result.echoes_removed:
+        print(
+            "warning: the same speech arrived on both channels — you were probably on "
+            "speakers rather than headphones. The cleaner copy was kept.",
+            file=sys.stderr,
+        )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
 
     if args.command == "transcribe":
         return _transcribe(args)
+
+    if args.command == "merge":
+        return _merge(args)
 
     if args.command != "note":  # pragma: no cover - argparse enforces this
         raise SystemExit(f"unknown command {args.command!r}")
