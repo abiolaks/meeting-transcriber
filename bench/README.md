@@ -112,19 +112,39 @@ A useful rule of thumb while reading: **RTF** is the ratio of processing time to
 audio time. RTF 0.5 means a 60-minute meeting takes 30 minutes. Lower is better;
 anything above 1.0 is slower than realtime.
 
-## 5. Capture test (10 minutes, separate)
+## 5. Capture test (do this first — 15 minutes, no models needed)
 
-The CPU numbers do not tell us if we can *hear* the meeting. While a real Teams
-call is running, with the app script running as a plain recorder:
+Speed is worth nothing if we cannot hear the meeting. This test needs no downloads
+beyond Python packages, so run it before the benchmark:
 
-1. With headphones: confirm ch1 (loopback) carries the remote participants and
-   ch0 (mic) carries only you.
-2. With laptop speakers: check whether remote voices also leak into ch0. If they
-   do, note the level difference — that decides whether §6-C3 (echo warning) is a
-   real feature or dead weight.
-3. Switch audio devices mid-call and confirm the script keeps writing.
-4. Try a Bluetooth headset, which is the worst case for drift and dropouts.
+```cmd
+py -3 -m pip install soundcard numpy
+py -3 capture-test.py --list
+py -3 capture-test.py --seconds 30
+```
 
-Report which of the three platforms (Zoom / Teams / Meet-in-browser) needed
-anything unusual. Meet in a browser is usually fine; Teams sometimes routes audio
-through a protected path.
+While it records, play any video with speech (that should land in `loopback.wav`)
+and count to ten out loud (that should land in `mic.wav`).
+
+Pass conditions:
+
+1. Both files contain audio, and neither is silent.
+2. **They are separate** — `loopback.wav` must not contain your voice, and
+   `mic.wav` must not contain the other people. This is the whole reason the
+   architecture uses two channels.
+3. With headphones, repeat during a real Zoom / Teams / Meet call. Record which
+   of the three needed anything unusual — Meet in a browser is usually fine,
+   Bluetooth headsets are the worst case and often expose no loopback at all.
+
+If `mic.wav` turns out to contain the remote participants, you were on
+speakerphone and echo cancellation was off. That makes SPEC §6-C3 a required
+feature rather than a nicety.
+
+Record the outcome in [RESULTS.md](RESULTS.md).
+
+## 6. Record the results
+
+[RESULTS.md](RESULTS.md) is the go/no-go record. Fill it in as you measure, and
+write the decision down while the numbers are fresh. If the gates in SPEC §17 are
+not met, the answer is different hardware or `DEPLOYMENT.md` Mode B — not more
+tuning.
