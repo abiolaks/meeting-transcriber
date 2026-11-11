@@ -15,3 +15,14 @@ This is the only part of the project that cannot be verified anywhere except the
 - [ ] Verified against Zoom and Teams on the target laptop, and against Meet running in a browser
 - [ ] Plugging in or removing a headset mid-recording does not stop or corrupt the capture
 - [ ] The speakerphone case is either handled or explicitly warned about
+
+## Comments
+
+**2026-11-11 — implemented, not yet run on Windows.** `src/mt/capture.py` records
+loopback and mic to two WAVs with per-channel peak levels and a `silent` warning.
+Wired to `mt capture`. 21 unit tests pass on macOS against a fake soundcard; the
+real-device probe skips.
+
+Unverified, and only testable on the laptop: simultaneous WASAPI capture, 30-minute
+stability, headset plug/unplug, and behaviour with Zoom/Teams/Meet. Follow
+`docs/windows-testing.md`.

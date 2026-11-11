@@ -15,3 +15,15 @@ Without the harness, every later tuning change is judged by vibes. This is the t
 - [ ] A deliberately degraded run (e.g. wrong model) lowers the scores, proving the harness actually measures something
 - [ ] Exits non-zero on any stage failure rather than writing a partial note
 - [ ] Total wall-clock time is recorded per stage
+
+## Comments
+
+**2026-11-11 — implemented, pending the gold set.** `mt run` takes two channel WAVs
+and writes `note.md`; `mt eval` prints WER per channel plus action-item
+precision/recall as a markdown table ready for `bench/RESULTS.md`.
+
+Structure: `pipeline.process_transcripts` (testable anywhere, no models) is lifted
+by `pipeline.process_wavs` (adds ASR). Stage timings and echo count are reported.
+
+Not done: the gold set itself. Scoring is meaningless until there are ten real
+meetings with hand-written action items — that is calendar time, not code.
