@@ -1,15 +1,23 @@
 <#
-  Quick power/clock check for the Phase 0 laptop.
+  Power / clock check for the Phase 0 laptop.
 
-  Answers one question: is this CPU allowed to boost, or is it pinned at base
-  clock? A pinned 15 W part roughly halves throughput, which changes the whole
-  time budget in SPEC.md section 4.
+  Question it answers: is this CPU allowed to boost, or pinned at base clock?
+
+  v2 fixes:
+    - powercfg parsing took the FIRST hex value in the block ("Minimum Possible
+      Setting") instead of the current index. It reported "0%" for a machine that
+      was clearly boosting.
+    - hidden power settings (no current index) are now reported as hidden rather
+      than as a cap.
+    - adds Win32_Processor.CurrentClockSpeed as a second, independent clock
+      reading, because the % Processor Performance counter can be unreliable on
+      HWP / Speed Shift machines.
 
   Usage:
       powershell -ExecutionPolicy Bypass -File .\check-power.ps1
       powershell -ExecutionPolicy Bypass -File .\check-power.ps1 -Seconds 30
 
-  Run it plugged in, with the machine idle, and nothing else heavy open.
+  Run it plugged in, idle, with nothing else heavy open.
 #>
 
 [CmdletBinding()]
@@ -23,16 +31,36 @@ function Line([string]$t, [string]$c = 'Gray') { Write-Host $t -ForegroundColor 
 function Rule { Line ('-' * 66) 'DarkGray' }
 
 function Get-PerfPct {
-    # % Processor Performance = effective frequency / nominal frequency * 100.
-    # ~100 means pinned at nominal. >130 means boost is working.
     try {
         $s = (Get-Counter '\Processor Information(_Total)\% Processor Performance' -ErrorAction Stop).CounterSamples[0].CookedValue
         return [math]::Round($s, 1)
     } catch {
-        # Fallback for machines without the Processor Information counter set
-        $s = (Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction Stop).CounterSamples[0].CookedValue
-        return [math]::Round($s, 1)
+        return $null
     }
+}
+
+function Get-CurrentMHz {
+    try {
+        return [int](Get-CimInstance Win32_Processor | Select-Object -First 1).CurrentClockSpeed
+    } catch { return $null }
+}
+
+function Get-Median($values) {
+    $v = @($values | Where-Object { $null -ne $_ } | Sort-Object)
+    if ($v.Count -eq 0) { return $null }
+    $mid = [int][math]::Floor($v.Count / 2)
+    if ($v.Count % 2 -eq 1) { return $v[$mid] }
+    return [math]::Round(($v[$mid - 1] + $v[$mid]) / 2, 1)
+}
+
+# Read a powercfg setting's CURRENT AC index. Deliberately anchored to
+# "Current AC Power Setting Index" so it cannot match the min/max range lines.
+function Get-PowerSetting([string]$subgroup, [string]$setting) {
+    $raw = (& powercfg /q SCHEME_CURRENT $subgroup $setting 2>&1) -join "`n"
+    if ($raw -match 'Current AC Power Setting Index:\s*0x([0-9a-fA-F]+)') {
+        return [Convert]::ToInt32($Matches[1], 16)
+    }
+    return $null   # setting not exposed on this edition/plan
 }
 
 Rule
@@ -58,38 +86,48 @@ if ($batt) {
 }
 Line ""
 
-# ---- active power scheme + max processor state -------------------------------
-$scheme = (& powercfg /getactivescheme) -join ' '
-Line "Power scheme     : $($scheme.Trim())"
+# ---- active power scheme + processor settings -------------------------------
+$scheme = ((& powercfg /getactivescheme) -join ' ').Trim()
+Line "Power scheme     : $scheme"
 
-$maxState = (& powercfg /q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 2>&1) -join "`n"
-if ($maxState -match '0x000000([0-9a-fA-F]{2})') {
-    $pct = [Convert]::ToInt32($Matches[1], 16)
-    if ($pct -lt 100) { Line "Max processor    : $pct%  <-- CAP. Set to 100%." 'Red' }
-    else { Line "Max processor    : $pct% - fine" 'Green' }
+$SUB = 'SUB_PROCESSOR'
+
+$maxState = Get-PowerSetting $SUB 'PROCTHROTTLEMAX'
+if ($null -eq $maxState) {
+    Line "Max processor    : hidden (not exposed) - cannot be capped above 100%" 'Gray'
+} elseif ($maxState -lt 100) {
+    Line "Max processor    : $maxState%  <-- CAP. Should be 100%." 'Red'
+} else {
+    Line "Max processor    : $maxState% - fine" 'Green'
 }
 
-$boost = (& powercfg /q SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2>&1) -join "`n"
-if ($boost -match '0x000000([0-9a-fA-F]{2})') {
-    $mode = [Convert]::ToInt32($Matches[1], 16)
-    $label = @{ 0 = 'Disabled - CAP'; 1 = 'Enabled'; 2 = 'Aggressive'; 3 = 'Efficient enabled'; 4 = 'Efficient aggressive'; 5 = 'Aggressive at guaranteed'; 6 = 'Efficient aggressive at guaranteed' }[$mode]
-    if ($null -eq $label) { $label = "value $mode" }
-    if ($mode -eq 0) { Line "Boost mode       : $label  <-- CAP" 'Red' }
+$boost = Get-PowerSetting $SUB 'PERFBOOSTMODE'
+if ($null -eq $boost) {
+    Line "Boost mode       : hidden (not exposed in this plan) - see OEM tool" 'Gray'
+} else {
+    $labels = @{ 0 = 'Disabled'; 1 = 'Enabled'; 2 = 'Aggressive'; 3 = 'Efficient enabled'; 4 = 'Efficient aggressive'; 5 = 'Aggressive at guaranteed'; 6 = 'Efficient aggressive at guaranteed' }
+    $label = $labels[$boost]
+    if ($null -eq $label) { $label = "value $boost" }
+    if ($boost -eq 0) { Line "Boost mode       : $label  <-- CAP" 'Red' }
     else { Line "Boost mode       : $label" 'Green' }
 }
 Line ""
 
 # ---- idle sample ------------------------------------------------------------
 Line "Sampling at idle ..."
-$idle = @()
-for ($i = 0; $i -lt 3; $i++) { $idle += Get-PerfPct; Start-Sleep -Seconds 1 }
-$idleAvg = [math]::Round(($idle | Measure-Object -Average).Average, 1)
-Line ("  idle: " + ($idle -join '%, ') + "%")
+$idlePct = @(); $idleMHz = @()
+for ($i = 0; $i -lt 4; $i++) {
+    $p = Get-PerfPct; if ($null -ne $p) { $idlePct += $p }
+    $m = Get-CurrentMHz; if ($m) { $idleMHz += $m }
+    Start-Sleep -Seconds 1
+}
+if ($idlePct.Count) { Line ("  idle perf: " + ($idlePct -join '%, ') + "%") }
+if ($idleMHz.Count) { Line ("  idle MHz : " + ($idleMHz -join ', ')) }
 Line ""
 
 # ---- load sample ------------------------------------------------------------
 Line "Loading all $($cpu.NumberOfLogicalProcessors) logical cores for $Seconds s ..."
-$until = [DateTime]::UtcNow.AddSeconds($Seconds + 5)
+$until = [DateTime]::UtcNow.AddSeconds($Seconds + 6)
 $jobs = 1..$cpu.NumberOfLogicalProcessors | ForEach-Object {
     Start-Job -ScriptBlock {
         param($until)
@@ -98,55 +136,83 @@ $jobs = 1..$cpu.NumberOfLogicalProcessors | ForEach-Object {
     } -ArgumentList $until
 }
 
-$load = @()
+$loadPct = @(); $loadMHz = @()
 for ($i = 0; $i -lt $Seconds; $i++) {
-    $load += Get-PerfPct
     Start-Sleep -Seconds 1
+    # Skip the first two seconds: job startup is not representative of load.
+    if ($i -ge 2) {
+        $p = Get-PerfPct; if ($null -ne $p) { $loadPct += $p }
+        $m = Get-CurrentMHz; if ($m) { $loadMHz += $m }
+    }
 }
 
 $jobs | Stop-Job -ErrorAction SilentlyContinue
 $jobs | Remove-Job -Force -ErrorAction SilentlyContinue
 
-$loadAvg = [math]::Round(($load | Measure-Object -Average).Average, 1)
-$loadMax = [math]::Round(($load | Measure-Object -Maximum).Maximum, 1)
-$loadMin = [math]::Round(($load | Measure-Object -Minimum).Minimum, 1)
 Line ""
-Line "  load: min ${loadMin}%  avg ${loadAvg}%  max ${loadMax}%"
-Line "  samples: $($load -join ', ')"
+if ($loadPct.Count) {
+    $steady = $loadPct[[math]::Max(0, $loadPct.Count - 7)..($loadPct.Count - 1)]
+    Line ("  load perf: " + ($loadPct -join '%, ') + "%")
+    Line ("  load  median $((Get-Median $loadPct))%   steady-state median $((Get-Median $steady))%")
+}
+if ($loadMHz.Count) {
+    Line ("  load MHz  : " + ($loadMHz -join ', '))
+    Line ("  load  median $((Get-Median $loadMHz)) MHz   peak $(($loadMHz | Measure-Object -Maximum).Maximum) MHz")
+}
 Line ""
 
 # ---- verdict ----------------------------------------------------------------
-$effGHz = [math]::Round($nominalMHz / 1000.0 * $loadMax / 100.0, 2)
-$effAvg = [math]::Round($nominalMHz / 1000.0 * $loadAvg / 100.0, 2)
+$steadyPct  = if ($loadPct.Count)  { Get-Median ($loadPct[[math]::Max(0, $loadPct.Count - 7)..($loadPct.Count - 1)]) } else { $null }
+$steadyMHz  = Get-Median $loadMHz
+$peakMHz    = if ($loadMHz.Count) { ($loadMHz | Measure-Object -Maximum).Maximum } else { $null }
+
+# Prefer the hardware clock reading when available; fall back to the counter.
+$sustainedGHz = if ($steadyMHz) { [math]::Round($steadyMHz / 1000.0, 2) }
+                elseif ($steadyPct) { [math]::Round($nominalMHz / 1000.0 * $steadyPct / 100.0, 2) }
+                else { $null }
 
 Rule
 Line "  VERDICT" 'Cyan'
 Rule
-Line ("  Effective clock under load : max $effGHz GHz, sustained $effAvg GHz")
+if ($sustainedGHz)    { Line ("  Sustained clock under load : $sustainedGHz GHz") }
+if ($peakMHz)         { Line ("  Peak observed              : $([math]::Round($peakMHz / 1000.0, 2)) GHz") }
+if ($steadyPct)       { Line ("  Counter steady-state       : $steadyPct% of nominal") }
 Line ""
 
-if ($loadMax -lt 115) {
-    Line "  PINNED AT BASE. Boost is disabled or the BIOS/OEM caps it." 'Red'
-    Line "  Everything in SPEC.md section 4 gets ~1.5x slower. Gate 1 likely fails." 'Red'
+$pinned = $false
+if ($sustainedGHz -and $sustainedGHz -lt 2.3) { $pinned = $true }
+elseif (-not $sustainedGHz -and $steadyPct -and $steadyPct -lt 115) { $pinned = $true }
+
+if ($pinned) {
+    Line "  PINNED NEAR BASE CLOCK. Boost is disabled or capped." 'Red'
+    Line "  SPEC section 4 gets ~1.4-1.5x slower. Gate 1 likely fails." 'Red'
     Line ""
-    Line "  Things to try, in order:" 'Yellow'
-    Line "    1. Plug in, set Windows power mode to 'Best performance'." 'Yellow'
+    Line "  Try, in order:" 'Yellow'
+    Line "    1. Plug in; set Windows power mode to 'Best performance'." 'Yellow'
     Line "    2. powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100" 'Yellow'
     Line "       powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2" 'Yellow'
     Line "       powercfg /setactive SCHEME_CURRENT" 'Yellow'
-    Line "    3. Check the OEM app (Dell Power Manager, Lenovo Vantage, HP Command" 'Yellow'
-    Line "       Center) and set thermal mode to Performance / Ultra." 'Yellow'
-    Line "    4. Check BIOS for a 'Performance mode' or CPU power limit setting." 'Yellow'
-    Line "    5. Some corporate images disable boost deliberately. If so, it is" 'Yellow'
-    Line "       policy and cannot be fixed locally." 'Yellow'
-} elseif ($loadMax -lt 150) {
-    Line "  PARTIAL BOOST. Working, but not reaching the 4.2 GHz ceiling." 'Yellow'
-    Line "  Normal for a 15 W laptop under sustained load. Use the sustained" 'Yellow'
-    Line "  number above for planning, not the peak." 'Yellow'
+    Line "    3. OEM app (Dell Power Manager, Lenovo Vantage, HP Command Center):" 'Yellow'
+    Line "       set thermal mode to Performance / Ultra." 'Yellow'
+    Line "    4. BIOS: look for a CPU power limit or performance mode." 'Yellow'
+    Line "    5. If corporate policy pins clocks, it cannot be fixed locally." 'Yellow'
 } else {
-    Line "  BOOSTING NORMALLY. The 2112 MHz figure was just the WMI nominal value." 'Green'
+    Line "  BOOSTING. The CPU reaches well above base clock under load." 'Green'
+    Line "  The 2112 MHz WMI figure is nominal, not a cap." 'Green'
 }
 
+# The counter is known to misreport on HWP machines; say so rather than hide it.
+$idlePctMed = Get-Median $idlePct
+if ($idlePctMed -and $steadyPct -and $idlePctMed -gt ($steadyPct + 10)) {
+    Line ""
+    Line "  NOTE: idle reported HIGHER than load ($idlePctMed% vs $steadyPct%)." 'Yellow'
+    Line "  That is not physically meaningful - % Processor Performance is" 'Yellow'
+    Line "  unreliable on HWP / Speed Shift systems. Trust the MHz readings." 'Yellow'
+}
+
+Line ""
+Line "  Cross-check: Task Manager -> Performance -> CPU -> 'Speed' during" 'Cyan'
+Line "  a real whisper run. It should sit near the number above." 'Cyan'
 Line ""
 Line "  Next: run .\bench.ps1 and compare against the gates in README.md." 'Cyan'
 Line ""

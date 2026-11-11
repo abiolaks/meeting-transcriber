@@ -1,13 +1,19 @@
-# Local Meeting Transcriber — Specification v0.3.4
+# Local Meeting Transcriber — Specification v0.3.5
 
 Status: draft for review. v0.3 pins the Windows target to a specific CPU and
 downgrades the performance promise accordingly. v0.3.1 corrects the time budget.
 v0.3.2 confirms the 16 GB configuration. v0.3.3 fixes the channel-handling
-strategy. v0.3.4 makes the quantisation policy explicit.
+strategy. v0.3.4 makes the quantisation policy explicit. v0.3.5 closes the
+clock-speed question.
 Everything marked **[ASSUMPTION]** needs confirmation or rejection.
 
 ### Changelog
 
+- **v0.3.5** — **Clock cap resolved: the CPU boosts.** Measured ~4.1 GHz peak,
+  ~3.4–4.1 GHz sustained under load, so the 1.4–1.5× penalty in §4 does not
+  apply. Removes the "pinned at base" risk and replaces it with a note that
+  `% Processor Performance` is unreliable on this machine. Fixes a parsing bug in
+  `check-power.ps1` that reported 0% for a machine that was boosting correctly.
 - **v0.3.4** — Quantisation policy written down (§7-S7). Model file names and
   sizes verified against the upstream repo; the spec previously said "int8" while
   sizing downloads at f16 — that contradiction is resolved. ASR weights are
@@ -166,30 +172,29 @@ four-layer decoder. The encoder dominates runtime and does not shrink, so the
 decoder savings that make turbo fast on GPU buy almost nothing on a weak CPU.
 Turbo ≈ `medium` on this machine.
 
-#### Unverified risk: is the CPU allowed to boost?
+#### Clock speed: resolved (boost is working)
 
-The target laptop reports `MaxClockSpeed = 2112 MHz`. The i7-8650U is rated to
-4.2 GHz. 2112 MHz is only 11% above base clock, which is the signature of:
+The target laptop reports `MaxClockSpeed = 2112 MHz`, well below the 4.2 GHz spec
+sheet, which looked like a power-plan or OEM cap. **It is not.** Measured
+2026-11-11 with `bench/check-power.ps1` on AC power: the CPU reaches ~4.1 GHz peak
+and sustains roughly **3.4–4.1 GHz** under full-core load. The WMI figure is just
+the nominal value the firmware advertises.
 
-- a power plan capped at < 100% maximum processor state,
-- "Processor performance boost mode" disabled,
-- an OEM thermal profile set to Quiet/Cool,
-- a BIOS power limit, or
-- a corporate image that pins clocks on purpose.
+Consequences:
 
-**If the machine is genuinely pinned near 2.1 GHz, every figure in the table above
-degrades by roughly 1.4–1.5×**, and the `small` final pass becomes 36–54 minutes
-instead of 25–37 — which fails gate 1 in §17. This must be settled *before* the
-benchmark, because a benchmark run on a capped machine measures the cap, not the
-CPU.
+- The 1.4–1.5× penalty that §4 warned about **does not apply**. The RTF estimates
+  stand as written, and may improve once measured.
+- The time budget in this section was already written assuming throttling, so it
+  is not optimistic — it has headroom.
+- Caveat: a 20-second synthetic load is not a 30-minute whisper run. Sustained
+  clocks will settle lower once the heatsink saturates, and a live Teams call
+  steals cores. The real benchmark supersedes this measurement.
 
-`bench/check-power.ps1` answers this in about a minute: it samples
-`\Processor Information(_Total)\% Processor Performance` at idle and under
-full-core load. Values near 100% mean pinned; 150%+ means boost is working.
-
-The 15 W envelope still limits sustained clocks to roughly 2.2–3.0 GHz on a thin
-laptop even when everything is configured correctly. Plan on the sustained number,
-never the peak.
+Note for anyone re-running the check: `\Processor Information(_Total)\% Processor
+Performance` reported *higher* values at idle than under load on this machine,
+which is not physically meaningful — the counter is unreliable on HWP /
+Speed Shift systems. `Win32_Processor.CurrentClockSpeed` and Task Manager's
+"Speed" field are the trustworthy readings.
 
 #### What RTF means
 

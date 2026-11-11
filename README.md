@@ -25,8 +25,8 @@ Consequences, all argued in the spec:
 - A one-hour meeting yields its note **35–45 minutes after you press stop**, not
   in two minutes.
 - A 3B LLM with a hard **1,500 output-token budget** does the summarising.
-- CPU clocks are the binding constraint, not RAM, and the machine reports a
-  2112 MHz cap that may or may not be real.
+- CPU clocks are the binding constraint, not RAM. The 2112 MHz figure the machine
+  reports is nominal, not a cap — it boosts to ~4.1 GHz. Measured, not assumed.
 
 If those numbers are unacceptable, the answer is different hardware or a server —
 see [DEPLOYMENT.md](DEPLOYMENT.md), not a bigger model.
