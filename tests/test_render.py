@@ -120,3 +120,37 @@ def test_every_paragraph_appears_exactly_once():
 
     for paragraph in build_paragraphs(parsed):
         assert body.count(paragraph.text) == 1, paragraph.text
+
+
+def test_an_inferred_owner_is_marked_as_suspected():
+    from mt.note import ActionItem
+
+    draft_with_inferred = NoteDraft(
+        sections=(Section("All", 0.0, 120.0, ""),),
+        actions=(ActionItem(owner="Sam", action="Fix it", due=None,
+                            quote="one two three", start=1.0,
+                            owner_confidence="inferred"),),
+        decisions=(), questions=(),
+    )
+
+    out = render(draft_with_inferred, transcript())
+
+    assert "Sam (suspected)" in out
+
+
+def test_unverified_items_get_their_own_section():
+    from mt.note import ActionItem
+
+    draft_with_demoted = NoteDraft(
+        sections=(Section("All", 0.0, 120.0, ""),),
+        actions=(),
+        decisions=(), questions=(),
+        unverified=(ActionItem(owner="Priya", action="Send the budget", due=None,
+                               quote="I will send it Thursday", start=0.0),),
+    )
+
+    out = render(draft_with_demoted, transcript())
+
+    assert "## Unverified" in out
+    assert "Send the budget" in out
+    assert "could not be found" in out

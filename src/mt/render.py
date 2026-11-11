@@ -50,6 +50,14 @@ def _first_sentence(text: str) -> str:
     return text
 
 
+def _owner_label(item) -> str:
+    if not item.owner:
+        return "Unassigned"
+    if item.owner_confidence == "inferred":
+        return f"{item.owner} (suspected)"
+    return item.owner
+
+
 def _glance(draft: NoteDraft) -> list[str]:
     bullets = [
         summary
@@ -120,13 +128,27 @@ def render(draft: NoteDraft, transcript: Transcript) -> str:
     lines += _render_table(
         ["Owner", "Action", "Due", "Source"],
         [[
-            item.owner or "Unassigned",
+            _owner_label(item),
             item.action,
             item.due or "—",
             f"[{clock(item.start)}]",
         ] for item in draft.actions],
         "_None recorded._",
     )
+
+    if draft.unverified:
+        lines += ["## Unverified", ""]
+        lines += [
+            "These were reported by the model but could not be found in the "
+            "transcript. Treat them as suggestions, not facts.",
+            "",
+        ]
+        lines += _render_table(
+            ["Action", "Owner", "Claimed quote"],
+            [[item.action, item.owner or "Unassigned", f'"{item.quote}"']
+             for item in draft.unverified],
+            "",
+        )
 
     lines += ["## Open questions", ""]
     if draft.questions:
