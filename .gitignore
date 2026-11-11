@@ -1,0 +1,58 @@
+# ---- Models: never commit weights -------------------------------------------
+*.bin
+*.gguf
+*.onnx
+*.pt
+*.pth
+models/
+tools/
+
+# ---- Audio / video: may contain real meetings --------------------------------
+*.wav
+*.m4a
+*.mp3
+*.mp4
+*.mkv
+*.aac
+*.flac
+sample.*
+
+# ---- Benchmark output --------------------------------------------------------
+bench-results.txt
+bench/results/
+*.log
+
+# ---- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ---- Local data --------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+data/
+output/
+
+# ---- OS / editor -------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ---- Secrets -----------------------------------------------------------------
+.env
+.env.*
+*.pem
+*.key
+credentials*
