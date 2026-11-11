@@ -63,6 +63,7 @@ def _build_parser() -> argparse.ArgumentParser:
     run.add_argument("--binary", default="llama-cli")
     run.add_argument("--threads", type=int, default=None)
     run.add_argument("--out", default="note.md")
+    run.add_argument("--llm", choices=("llama", "fake"), default="llama")
 
     cap = sub.add_parser("capture", help="record loopback and mic (Windows)")
     cap.add_argument("--seconds", type=float, required=True)
@@ -170,7 +171,7 @@ def _capture(args: argparse.Namespace) -> int:
 
 
 def _run(args: argparse.Namespace) -> int:
-    llm = LlamaCppLLM(args.model, binary=args.binary)
+    llm = FakeLLM() if args.llm == "fake" else LlamaCppLLM(args.model, binary=args.binary)
     try:
         result = pipeline.process_wavs(
             args.mic, args.remote,

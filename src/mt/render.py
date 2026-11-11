@@ -106,7 +106,8 @@ def _render_transcript(sections: tuple[Section, ...], paragraphs: list[Paragraph
 def render(draft: NoteDraft, transcript: Transcript) -> str:
     paragraphs = build_paragraphs(transcript)
     meeting = transcript.meeting
-    duration = f"{int(meeting.duration_s // 60)} min"
+    minutes = int(meeting.duration_s // 60)
+    duration = f"{minutes} min" if minutes else f"{int(meeting.duration_s)}s"
 
     lines = [f"# {meeting.title} — {meeting.date}, {duration}", ""]
 

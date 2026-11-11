@@ -154,3 +154,21 @@ def test_unverified_items_get_their_own_section():
     assert "## Unverified" in out
     assert "Send the budget" in out
     assert "could not be found" in out
+
+
+def test_a_sub_minute_meeting_does_not_render_as_zero_minutes():
+    short = parse({
+        "version": 1,
+        "meeting": {"title": "Quick", "date": "2026-11-11", "duration_s": 42.0},
+        "channels": [{"id": "ch0", "label": "You"}],
+        "segments": [{"id": "s1", "start": 0.0, "end": 42.0, "channel": "ch0", "text": "hello"}],
+    })
+
+    out = render(
+        NoteDraft(sections=(Section("All", 0.0, 42.0, ""),), actions=(),
+                  decisions=(), questions=()),
+        short,
+    )
+
+    assert "0 min" not in out.splitlines()[0]
+    assert "42s" in out.splitlines()[0]
