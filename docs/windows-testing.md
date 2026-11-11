@@ -4,16 +4,22 @@ Everything below runs on the target machine. Nothing here has been executed on
 Windows yet — it was built and tested on macOS. Treat first contact as a test, not
 a formality.
 
-## 1. Preflight (5 minutes)
+## 1. Preflight (15 minutes, mostly downloads)
+
+Install the two prerequisites, then run the setup script:
 
 ```cmd
 winget install Python.Python.3.12
 winget install Gyan.FFmpeg
-py -3 -m pip install soundcard numpy
+powershell -ExecutionPolicy Bypass -File scripts\setup-windows.ps1
 ```
 
-Get the binaries and models into the repo (they are gitignored, so they do not
-travel with a clone):
+That script downloads the Windows binaries (whisper.cpp `b5454`, llama.cpp
+`b12284`) and the models into `vendor\` and `models\` — both gitignored, so they
+never travel with a clone — then prints the exact commands to run. Re-running is
+safe; existing files are skipped. `-SkipModels` defers the 2.3 GB download.
+
+If you would rather do it by hand, the pieces are:
 
 | What | Where |
 |---|---|
