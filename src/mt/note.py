@@ -18,6 +18,49 @@ from .paragraphs import Paragraph, build as build_paragraphs
 from .transcript import Meeting, Transcript
 
 
+def _normalise(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
+def anchor_actions(
+    draft: NoteDraft, paragraphs: Sequence[Paragraph]
+) -> tuple[NoteDraft, int]:
+    """Point every action item at the moment its quote was actually spoken.
+
+    The model is not asked to compute timestamps any more, because it gets them
+    wrong: a quote it placed at 00:20 appeared at 02:15. The quote itself is
+    checkable, so the position is computed from it. Items whose quote is not in
+    the transcript are dropped, and counted so the loss is visible.
+    """
+    spoken = [(paragraph, _normalise(paragraph.text)) for paragraph in paragraphs]
+    kept: list[ActionItem] = []
+    dropped = 0
+
+    for item in draft.actions:
+        quote = _normalise(item.quote)
+        match = next((p for p, text in spoken if quote and quote in text), None)
+        if match is None:
+            dropped += 1
+            continue
+        kept.append(replace(item, start=match.start))
+
+    return replace(draft, actions=tuple(kept)), dropped
+
+
+def is_grounded(draft: NoteDraft, paragraphs: Sequence[Paragraph]) -> bool:
+    """A cheap guard against total fabrication.
+
+    If the model produced action items but not one of their quotes appears in the
+    transcript, it is writing from its imagination — usually by copying the
+    prompt's example. Per-item demotion is ticket 02; this only stops a wholly
+    invented note from being written at all.
+    """
+    if not draft.actions:
+        return True
+    spoken = _normalise(" ".join(paragraph.text for paragraph in paragraphs))
+    return any(_normalise(item.quote) and _normalise(item.quote) in spoken for item in draft.actions)
+
+
 class NoteError(RuntimeError):
     """The draft could not be turned into a note that covers the meeting."""
 
@@ -129,8 +172,9 @@ def build(transcript: Transcript, llm: LLM) -> NoteDraft:
     for attempt in range(2):
         draft = llm.draft(transcript.meeting, paragraphs)
         sections = normalise_sections(draft.sections, duration)
-        if sections:
+        if sections and is_grounded(draft, paragraphs):
             sections = anchor_to_transcript(sections, paragraphs)
+            draft, _dropped = anchor_actions(draft, paragraphs)
             return replace(draft, sections=tuple(sections))
         if attempt == 0:
             continue  # the spec allows exactly one retry

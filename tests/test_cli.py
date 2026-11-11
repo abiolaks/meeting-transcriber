@@ -81,11 +81,12 @@ def test_a_malformed_transcript_fails_with_a_useful_message(tmp_path):
     assert "meeting" in result.stderr or "channels" in result.stderr
 
 
-def test_the_llama_adapter_refuses_cleanly_until_it_exists(tmp_path):
+def test_the_llama_adapter_says_what_is_missing_without_a_model(tmp_path):
     transcript = tmp_path / "t.json"
     write_transcript(transcript)
 
     result = run_cli("note", str(transcript), "--out", str(tmp_path / "n.md"), "--llm", "llama")
 
     assert result.returncode == 3
-    assert "not implemented" in result.stderr.lower()
+    assert "model path" in result.stderr.lower()
+    assert not (tmp_path / "n.md").exists(), "a failed run must not write a note"

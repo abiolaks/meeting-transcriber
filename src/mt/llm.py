@@ -89,19 +89,3 @@ def _clause(text: str) -> str:
         if separator in text:
             return text.split(separator, 1)[0].strip()
     return text.strip()
-
-
-class LlamaCppLLM:
-    """Local llama.cpp backend. Ticket 01's remaining work."""
-
-    name = "llama"
-
-    def __init__(self, model_path: str | None = None) -> None:
-        self.model_path = model_path
-
-    def draft(self, meeting: Meeting, paragraphs: Sequence[Paragraph]) -> NoteDraft:
-        raise NotImplementedError(
-            "LlamaCppLLM is not implemented yet. Ticket 01 still needs the "
-            "llama.cpp invocation, the JSON grammar, and the model fetch. "
-            "Use --llm fake until then."
-        )

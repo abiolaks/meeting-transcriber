@@ -5,7 +5,8 @@
 *.pt
 *.pth
 models/
-tools/
+vendor/
+binaries/
 
 # ---- Audio / video: may contain real meetings --------------------------------
 *.wav

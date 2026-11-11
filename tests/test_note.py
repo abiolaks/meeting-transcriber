@@ -169,7 +169,7 @@ def test_action_items_and_decisions_survive_the_round_trip():
         sections=[Section("All", 0.0, 120.0, "")],
         actions=[ActionItem(
             owner="Sam", action="Fix the backoff", due="Friday",
-            quote="I'll fix the backoff", start=12.0,
+            quote="one two three four five", start=12.0,
         )],
         decisions=[Decision("Ship on the 20th", 30.0)],
     )
@@ -178,3 +178,52 @@ def test_action_items_and_decisions_survive_the_round_trip():
 
     assert note.actions[0].owner == "Sam"
     assert note.decisions[0].text == "Ship on the 20th"
+
+
+def test_a_wholly_fabricated_draft_is_rejected():
+    """An ungrounded note must not be written, however plausible it looks."""
+    llm = Stub(
+        sections=[Section("All", 0.0, 120.0, "")],
+        actions=[ActionItem(owner="Priya", action="Send the budget", due="Thursday",
+                            quote="I will send it Thursday", start=12.0)],
+    )
+
+    with pytest.raises(NoteError):
+        build(transcript(120.0), llm)
+
+
+def test_a_draft_with_no_actions_is_not_treated_as_fabricated():
+    llm = Stub(sections=[Section("All", 0.0, 120.0, "A summary.")])
+
+    note = build(transcript(120.0), llm)
+
+    assert note.actions == ()
+
+
+def test_action_timestamps_are_computed_from_the_quote_not_trusted():
+    llm = Stub(
+        sections=[Section("All", 0.0, 120.0, "")],
+        actions=[ActionItem(owner="Remote", action="Do the thing", due=None,
+                            quote="one two three four five", start=99.0)],
+    )
+
+    note = build(transcript(120.0), llm)
+
+    # The quote occurs from 0s, so that is where the citation must point.
+    assert note.actions[0].start == 0.0
+
+
+def test_an_item_whose_quote_is_absent_is_dropped():
+    llm = Stub(
+        sections=[Section("All", 0.0, 120.0, "")],
+        actions=[
+            ActionItem(owner=None, action="Real", due=None,
+                       quote="one two three four five", start=0.0),
+            ActionItem(owner=None, action="Invented", due=None,
+                       quote="this was never said", start=10.0),
+        ],
+    )
+
+    note = build(transcript(120.0), llm)
+
+    assert [a.action for a in note.actions] == ["Real"]

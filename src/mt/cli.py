@@ -9,7 +9,8 @@ import time
 from pathlib import Path
 
 from . import note as note_module
-from .llm import FakeLLM, LlamaCppLLM
+from .llama_cpp import LlamaCppLLM
+from .llm import FakeLLM
 from .render import render
 from .transcript import TranscriptError, load
 
@@ -31,6 +32,7 @@ def _build_parser() -> argparse.ArgumentParser:
         help="which model adapter to use (default: fake)",
     )
     note.add_argument("--model", default=None, help="path to a GGUF model for --llm llama")
+    note.add_argument("--binary", default="llama-cli", help="path to the llama.cpp binary")
     return parser
 
 
@@ -54,14 +56,16 @@ def main(argv: list[str] | None = None) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 
-    llm = FakeLLM() if args.llm == "fake" else LlamaCppLLM(args.model)
+    llm = FakeLLM() if args.llm == "fake" else LlamaCppLLM(
+        args.model, binary=args.binary,
+    )
     if llm.name == "fake":
         print(FAKE_WARNING, file=sys.stderr)
 
     started = time.monotonic()
     try:
         draft = note_module.build(transcript, llm)
-    except NotImplementedError as exc:
+    except (ValueError, OSError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 3
     except note_module.NoteError as exc:

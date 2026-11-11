@@ -37,3 +37,27 @@ section-tiling are correct. **What it has not proven:** that a small local model
 can write a note worth reading. The "At a glance" bullets above the fold are
 currently arbitrary lines from the fake, not summaries. Do not read the demo note
 as evidence of note quality.
+
+**2026-11-11 — real local model wired in. Ticket still open.**
+
+`LlamaCppLLM` now exists: prompt builder, GBNF grammar forcing JSON, a parser that
+survives llama.cpp's banner and truncated generations, and two guards. Tested
+against a real llama.cpp build (b12284) and Qwen2.5 1.5B and 3B on Apple Silicon.
+
+Evidence from real runs, which is the point of this ticket:
+
+- **1.5B copies the prompt's example.** Given a filled example it returned
+  "Budget review", "Priya", "Cut vendor spend by ten percent" — none of which
+  happened. Grounding caught it; no note was written.
+- **3B produced a genuinely grounded note once**: real quotes, a correct summary,
+  six action items drawn from the transcript.
+- **3B then failed to emit JSON at all** on a later run, twice. Small local models
+  are flaky; one retry is not enough. Bump to three.
+- **Timestamps must never be asked for.** The model cited `00:00:20` for a quote
+  spoken at `02:15`. Action times are now computed from where the quote occurs in
+  the transcript; unplaceable items are dropped.
+- Draft time on an M2: ~105s for a 10-minute meeting, single attempt.
+
+Remaining: raise the retry count, ground and timestamp decisions, force more than
+one section (3B returned a single section), and compare against `medium.en` output
+quality. Fixtures and models are gitignored — 2.8GB of weights stay out of the repo.
