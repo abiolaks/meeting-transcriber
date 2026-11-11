@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 import time
 from pathlib import Path
 
 from . import note as note_module
+from .asr import ASRError, transcribe
 from .llama_cpp import LlamaCppLLM
 from .llm import FakeLLM
 from .render import render
@@ -33,6 +35,15 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     note.add_argument("--model", default=None, help="path to a GGUF model for --llm llama")
     note.add_argument("--binary", default="llama-cli", help="path to the llama.cpp binary")
+
+    tr = sub.add_parser("transcribe", help="transcribe a WAV file to transcript JSON")
+    tr.add_argument("audio", help="path to a 16 kHz mono WAV file")
+    tr.add_argument("--model", required=True, help="path to a whisper.cpp model")
+    tr.add_argument("--binary", default="whisper-cli", help="path to whisper-cli")
+    tr.add_argument("--out", default=None, help="output JSON path (default: <audio>.json)")
+    tr.add_argument("--threads", type=int, default=None, help="default: cores - 1")
+    tr.add_argument("--channel", default="ch0", help="channel id written to the transcript")
+    tr.add_argument("--label", default="You", help="speaker label for this channel")
     return parser
 
 
@@ -44,8 +55,32 @@ def _write_atomically(path: Path, text: str) -> None:
     os.replace(temporary, path)
 
 
+def _transcribe(args: argparse.Namespace) -> int:
+    try:
+        result = transcribe(
+            args.audio, args.model, binary=args.binary, threads=args.threads,
+            channel_id=args.channel, label=args.label,
+        )
+    except ASRError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
+    out = Path(args.out) if args.out else Path(args.audio).with_suffix(".json")
+    _write_atomically(out, json.dumps(result.transcript.to_dict(), indent=2) + "\n")
+
+    print(
+        f"{result.transcript.meeting.title}: {len(result.transcript.segments)} segments, "
+        f"{result.audio_s:.1f}s audio in {result.elapsed_s:.1f}s "
+        f"(rtf {result.rtf:.2f}) -> {out}"
+    )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
+
+    if args.command == "transcribe":
+        return _transcribe(args)
 
     if args.command != "note":  # pragma: no cover - argparse enforces this
         raise SystemExit(f"unknown command {args.command!r}")

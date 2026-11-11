@@ -56,6 +56,31 @@ class Transcript:
     channels: tuple[Channel, ...]
     segments: tuple[Segment, ...]
 
+    def to_dict(self) -> dict[str, Any]:
+        """The document form, for writing back to disk."""
+        return {
+            "version": SUPPORTED_VERSION,
+            "meeting": {
+                "title": self.meeting.title,
+                "date": self.meeting.date,
+                "duration_s": self.meeting.duration_s,
+            },
+            "channels": [{"id": c.id, "label": c.label} for c in self.channels],
+            "segments": [
+                {
+                    "id": s.id,
+                    "start": s.start,
+                    "end": s.end,
+                    "channel": s.channel,
+                    "text": s.text,
+                    "words": [
+                        {"w": w.w, "start": w.start, "end": w.end} for w in s.words
+                    ],
+                }
+                for s in self.segments
+            ],
+        }
+
     def label_for(self, channel_id: str) -> str:
         for channel in self.channels:
             if channel.id == channel_id:
