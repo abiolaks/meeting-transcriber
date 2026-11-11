@@ -40,7 +40,8 @@ see [DEPLOYMENT.md](DEPLOYMENT.md), not a bigger model.
 | [SPEC.md](SPEC.md) | The product spec: architecture, capture, ASR, synthesis, output format, storage, packaging, phases |
 | [TUNING.md](TUNING.md) | How to make it fast and accurate on *this* laptop: every knob, ranked, with the measurement protocol |
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Where the compute runs — local, thin-agent-plus-server, or browser-only — and what "free hosting" actually gets you |
-| [bench/](bench/) | Phase 0: a PowerShell benchmark kit and a CPU boost/power diagnostic |
+| [DEVELOPMENT.md](DEVELOPMENT.md) | Develop on Mac, ship on Windows: what each machine can and cannot prove, and how packaging works |
+| [bench/](bench/) | Phase 0: capture smoke test, benchmark kit, CPU power diagnostic, results template |
 
 ---
 
