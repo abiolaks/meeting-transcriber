@@ -101,3 +101,14 @@ def test_decisions_are_carried_through_unchanged():
 
 def test_normalise_strips_punctuation_and_case():
     assert normalise("Hello,  WORLD!") == "hello world"
+
+
+def test_the_same_commitment_stated_twice_is_kept_once():
+    first = ActionItem(owner="Remote", action="Fix the backoff and add a dead letter queue",
+                       due=None, quote="fix the backoff and add a dead letter queue", start=0.0)
+    second = ActionItem(owner="Remote", action="Fix the backoff and add the dead letter queue",
+                        due=None, quote="fix the backoff", start=0.0)
+
+    result = verify(draft(first, second), build_paragraphs(transcript()))
+
+    assert len(result.draft.actions) == 1

@@ -57,6 +57,8 @@ TASK = """Write the JSON note for the transcript above.
 - sections must cover the whole meeting, in order, with no gaps and no overlaps.
 - Three to six sections; at most twenty action items.
 - owner is null unless the transcript says who will do it.
+- when a speaker says "I will", "I'll" or "I can", the owner is that speaker's
+  label: "You" or "Remote".
 - If the transcript does not say, omit the item rather than guessing."""
 
 MAX_TRANSCRIPT_CHARS = 24_000
@@ -107,11 +109,17 @@ def to_seconds(value: Any) -> float:
     raise ValueError(f"cannot read timestamp {value!r}")
 
 
+# Models frequently emit the *string* "null" where JSON null was meant, which
+# would otherwise render as an owner named null.
+NULLISH = {"", "null", "none", "n/a", "na", "unassigned", "-", "unknown"}
+
+
 def _optional_str(value: Any) -> str | None:
     if value is None:
         return None
-    if isinstance(value, str) and value.strip():
-        return value.strip()
+    if isinstance(value, str):
+        text = value.strip()
+        return text if text.lower() not in NULLISH else None
     return None
 
 

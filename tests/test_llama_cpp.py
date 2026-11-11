@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from mt.llama_cpp import GRAMMAR, build_prompt, parse_draft, to_seconds
+from mt.llama_cpp import GRAMMAR, MAX_TRANSCRIPT_CHARS, build_prompt, parse_draft, to_seconds
 from mt.paragraphs import build as build_paragraphs
 from mt.transcript import parse
 
@@ -59,7 +59,8 @@ def test_a_very_long_transcript_is_truncated_rather_than_crashing():
     long = build_prompt(parsed.meeting, list(paragraphs) * 400)
 
     assert "[transcript truncated]" in long
-    assert len(long) < 25_000
+    # Transcript is capped; the instructions and schema ride on top.
+    assert len(long) < MAX_TRANSCRIPT_CHARS + 2_000
 
 
 def test_the_grammar_declares_a_json_root():
@@ -134,3 +135,18 @@ def test_the_real_model_produces_a_parseable_draft():
 
     assert draft.sections, "model returned no sections"
     assert Path(os.environ["MT_LLAMA_MODEL"]).exists()
+
+
+def test_the_string_null_is_not_treated_as_a_person():
+    payload = {
+        "sections": [], "decisions": [], "questions": [],
+        "actions": [
+            {"owner": "null", "action": "Fix it", "start": 1},
+            {"owner": "none", "action": "Ship it", "start": 2},
+            {"owner": "Remote", "action": "Draft it", "start": 3},
+        ],
+    }
+
+    draft = parse_draft(json.dumps(payload))
+
+    assert [a.owner for a in draft.actions] == [None, None, "Remote"]

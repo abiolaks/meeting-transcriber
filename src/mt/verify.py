@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, replace
+from difflib import SequenceMatcher
 from typing import Sequence
 
 from .note import ActionItem, NoteDraft
@@ -25,6 +26,7 @@ STATED_CUES = re.compile(
 )
 
 PUNCTUATION = re.compile(r"[^\w\s']")
+DUPLICATE_SIMILARITY = 0.85
 
 
 class GroundingError(RuntimeError):
@@ -67,7 +69,14 @@ def verify(draft: NoteDraft, paragraphs: Sequence[Paragraph]) -> VerificationRes
     kept: list[ActionItem] = []
     demoted: list[ActionItem] = []
 
+    seen_actions: list[str] = []
     for item in draft.actions:
+        if any(
+            SequenceMatcher(None, normalise(item.action), existing).ratio()
+            >= DUPLICATE_SIMILARITY
+            for existing in seen_actions
+        ):
+            continue  # same commitment, said twice
         paragraph = _find_paragraph(item.quote, paragraphs)
         if paragraph is None:
             demoted.append(replace(item, owner_confidence="unassigned"))
@@ -77,6 +86,7 @@ def verify(draft: NoteDraft, paragraphs: Sequence[Paragraph]) -> VerificationRes
             start=paragraph.start,
             owner_confidence=classify_owner(item.owner, item.quote),
         ))
+        seen_actions.append(normalise(item.action))
 
     # Decisions are paraphrases and cannot be substring-checked, so they pass
     # through with the model's timestamps. That is a known soft spot.
