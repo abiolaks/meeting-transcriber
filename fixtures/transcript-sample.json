@@ -1,0 +1,4596 @@
+{
+  "version": 1,
+  "meeting": {
+    "title": "Billing migration weekly",
+    "date": "2026-11-11",
+    "duration_s": 604.75
+  },
+  "channels": [
+    {
+      "id": "ch0",
+      "label": "You"
+    },
+    {
+      "id": "ch1",
+      "label": "Remote"
+    }
+  ],
+  "segments": [
+    {
+      "id": "s01",
+      "start": 0.0,
+      "end": 7.0,
+      "channel": "ch1",
+      "text": "Thanks for joining. Let's start with the billing migration and where we actually are.",
+      "words": [
+        {
+          "w": "Thanks",
+          "start": 0.0,
+          "end": 0.57
+        },
+        {
+          "w": "for",
+          "start": 0.57,
+          "end": 0.895
+        },
+        {
+          "w": "joining.",
+          "start": 0.895,
+          "end": 1.628
+        },
+        {
+          "w": "Let's",
+          "start": 1.628,
+          "end": 2.116
+        },
+        {
+          "w": "start",
+          "start": 2.116,
+          "end": 2.605
+        },
+        {
+          "w": "with",
+          "start": 2.605,
+          "end": 3.012
+        },
+        {
+          "w": "the",
+          "start": 3.012,
+          "end": 3.337
+        },
+        {
+          "w": "billing",
+          "start": 3.337,
+          "end": 3.988
+        },
+        {
+          "w": "migration",
+          "start": 3.988,
+          "end": 4.802
+        },
+        {
+          "w": "and",
+          "start": 4.802,
+          "end": 5.128
+        },
+        {
+          "w": "where",
+          "start": 5.128,
+          "end": 5.616
+        },
+        {
+          "w": "we",
+          "start": 5.616,
+          "end": 5.86
+        },
+        {
+          "w": "actually",
+          "start": 5.86,
+          "end": 6.593
+        },
+        {
+          "w": "are.",
+          "start": 6.593,
+          "end": 7.0
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "start": 9.52,
+      "end": 15.02,
+      "channel": "ch0",
+      "text": "Sure. My understanding is we're behind. How far behind are we?",
+      "words": [
+        {
+          "w": "Sure.",
+          "start": 9.52,
+          "end": 10.044
+        },
+        {
+          "w": "My",
+          "start": 10.044,
+          "end": 10.306
+        },
+        {
+          "w": "understanding",
+          "start": 10.306,
+          "end": 11.528
+        },
+        {
+          "w": "is",
+          "start": 11.528,
+          "end": 11.79
+        },
+        {
+          "w": "we're",
+          "start": 11.79,
+          "end": 12.314
+        },
+        {
+          "w": "behind.",
+          "start": 12.314,
+          "end": 13.012
+        },
+        {
+          "w": "How",
+          "start": 13.012,
+          "end": 13.361
+        },
+        {
+          "w": "far",
+          "start": 13.361,
+          "end": 13.71
+        },
+        {
+          "w": "behind",
+          "start": 13.71,
+          "end": 14.322
+        },
+        {
+          "w": "are",
+          "start": 14.322,
+          "end": 14.671
+        },
+        {
+          "w": "we?",
+          "start": 14.671,
+          "end": 15.02
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "start": 19.745,
+      "end": 28.745,
+      "channel": "ch1",
+      "text": "About two weeks at this point. The retry queue is the only thing that can still bite us.",
+      "words": [
+        {
+          "w": "About",
+          "start": 19.745,
+          "end": 20.352
+        },
+        {
+          "w": "two",
+          "start": 20.352,
+          "end": 20.756
+        },
+        {
+          "w": "weeks",
+          "start": 20.756,
+          "end": 21.363
+        },
+        {
+          "w": "at",
+          "start": 21.363,
+          "end": 21.666
+        },
+        {
+          "w": "this",
+          "start": 21.666,
+          "end": 22.172
+        },
+        {
+          "w": "point.",
+          "start": 22.172,
+          "end": 22.88
+        },
+        {
+          "w": "The",
+          "start": 22.88,
+          "end": 23.284
+        },
+        {
+          "w": "retry",
+          "start": 23.284,
+          "end": 23.891
+        },
+        {
+          "w": "queue",
+          "start": 23.891,
+          "end": 24.498
+        },
+        {
+          "w": "is",
+          "start": 24.498,
+          "end": 24.801
+        },
+        {
+          "w": "the",
+          "start": 24.801,
+          "end": 25.206
+        },
+        {
+          "w": "only",
+          "start": 25.206,
+          "end": 25.711
+        },
+        {
+          "w": "thing",
+          "start": 25.711,
+          "end": 26.318
+        },
+        {
+          "w": "that",
+          "start": 26.318,
+          "end": 26.824
+        },
+        {
+          "w": "can",
+          "start": 26.824,
+          "end": 27.228
+        },
+        {
+          "w": "still",
+          "start": 27.228,
+          "end": 27.835
+        },
+        {
+          "w": "bite",
+          "start": 27.835,
+          "end": 28.341
+        },
+        {
+          "w": "us.",
+          "start": 28.341,
+          "end": 28.745
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "start": 30.635,
+      "end": 34.135,
+      "channel": "ch0",
+      "text": "What is the failure rate on retries?",
+      "words": [
+        {
+          "w": "What",
+          "start": 30.635,
+          "end": 31.108
+        },
+        {
+          "w": "is",
+          "start": 31.108,
+          "end": 31.392
+        },
+        {
+          "w": "the",
+          "start": 31.392,
+          "end": 31.77
+        },
+        {
+          "w": "failure",
+          "start": 31.77,
+          "end": 32.527
+        },
+        {
+          "w": "rate",
+          "start": 32.527,
+          "end": 33.0
+        },
+        {
+          "w": "on",
+          "start": 33.0,
+          "end": 33.284
+        },
+        {
+          "w": "retries?",
+          "start": 33.284,
+          "end": 34.135
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "start": 37.6,
+      "end": 44.6,
+      "channel": "ch1",
+      "text": "Roughly four percent fail on the third attempt, and then they are dropped entirely.",
+      "words": [
+        {
+          "w": "Roughly",
+          "start": 37.6,
+          "end": 38.267
+        },
+        {
+          "w": "four",
+          "start": 38.267,
+          "end": 38.683
+        },
+        {
+          "w": "percent",
+          "start": 38.683,
+          "end": 39.35
+        },
+        {
+          "w": "fail",
+          "start": 39.35,
+          "end": 39.767
+        },
+        {
+          "w": "on",
+          "start": 39.767,
+          "end": 40.017
+        },
+        {
+          "w": "the",
+          "start": 40.017,
+          "end": 40.35
+        },
+        {
+          "w": "third",
+          "start": 40.35,
+          "end": 40.85
+        },
+        {
+          "w": "attempt,",
+          "start": 40.85,
+          "end": 41.6
+        },
+        {
+          "w": "and",
+          "start": 41.6,
+          "end": 41.933
+        },
+        {
+          "w": "then",
+          "start": 41.933,
+          "end": 42.35
+        },
+        {
+          "w": "they",
+          "start": 42.35,
+          "end": 42.767
+        },
+        {
+          "w": "are",
+          "start": 42.767,
+          "end": 43.1
+        },
+        {
+          "w": "dropped",
+          "start": 43.1,
+          "end": 43.767
+        },
+        {
+          "w": "entirely.",
+          "start": 43.767,
+          "end": 44.6
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "start": 46.805,
+      "end": 54.305,
+      "channel": "ch1",
+      "text": "Nobody gets told. The customer just does not get charged, and no invoice is raised.",
+      "words": [
+        {
+          "w": "Nobody",
+          "start": 46.805,
+          "end": 47.43
+        },
+        {
+          "w": "gets",
+          "start": 47.43,
+          "end": 47.876
+        },
+        {
+          "w": "told.",
+          "start": 47.876,
+          "end": 48.412
+        },
+        {
+          "w": "The",
+          "start": 48.412,
+          "end": 48.769
+        },
+        {
+          "w": "customer",
+          "start": 48.769,
+          "end": 49.573
+        },
+        {
+          "w": "just",
+          "start": 49.573,
+          "end": 50.019
+        },
+        {
+          "w": "does",
+          "start": 50.019,
+          "end": 50.466
+        },
+        {
+          "w": "not",
+          "start": 50.466,
+          "end": 50.823
+        },
+        {
+          "w": "get",
+          "start": 50.823,
+          "end": 51.18
+        },
+        {
+          "w": "charged,",
+          "start": 51.18,
+          "end": 51.984
+        },
+        {
+          "w": "and",
+          "start": 51.984,
+          "end": 52.341
+        },
+        {
+          "w": "no",
+          "start": 52.341,
+          "end": 52.609
+        },
+        {
+          "w": "invoice",
+          "start": 52.609,
+          "end": 53.323
+        },
+        {
+          "w": "is",
+          "start": 53.323,
+          "end": 53.591
+        },
+        {
+          "w": "raised.",
+          "start": 53.591,
+          "end": 54.305
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "start": 57.14,
+      "end": 62.64,
+      "channel": "ch0",
+      "text": "That is worse than a failed payment, because it is invisible.",
+      "words": [
+        {
+          "w": "That",
+          "start": 57.14,
+          "end": 57.584
+        },
+        {
+          "w": "is",
+          "start": 57.584,
+          "end": 57.85
+        },
+        {
+          "w": "worse",
+          "start": 57.85,
+          "end": 58.382
+        },
+        {
+          "w": "than",
+          "start": 58.382,
+          "end": 58.825
+        },
+        {
+          "w": "a",
+          "start": 58.825,
+          "end": 59.003
+        },
+        {
+          "w": "failed",
+          "start": 59.003,
+          "end": 59.624
+        },
+        {
+          "w": "payment,",
+          "start": 59.624,
+          "end": 60.422
+        },
+        {
+          "w": "because",
+          "start": 60.422,
+          "end": 61.132
+        },
+        {
+          "w": "it",
+          "start": 61.132,
+          "end": 61.398
+        },
+        {
+          "w": "is",
+          "start": 61.398,
+          "end": 61.664
+        },
+        {
+          "w": "invisible.",
+          "start": 61.664,
+          "end": 62.64
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "start": 67.05,
+      "end": 75.05,
+      "channel": "ch1",
+      "text": "Exactly. That is why I would rather slip the date than ship it as it stands.",
+      "words": [
+        {
+          "w": "Exactly.",
+          "start": 67.05,
+          "end": 67.985
+        },
+        {
+          "w": "That",
+          "start": 67.985,
+          "end": 68.505
+        },
+        {
+          "w": "is",
+          "start": 68.505,
+          "end": 68.816
+        },
+        {
+          "w": "why",
+          "start": 68.816,
+          "end": 69.232
+        },
+        {
+          "w": "I",
+          "start": 69.232,
+          "end": 69.44
+        },
+        {
+          "w": "would",
+          "start": 69.44,
+          "end": 70.063
+        },
+        {
+          "w": "rather",
+          "start": 70.063,
+          "end": 70.79
+        },
+        {
+          "w": "slip",
+          "start": 70.79,
+          "end": 71.31
+        },
+        {
+          "w": "the",
+          "start": 71.31,
+          "end": 71.725
+        },
+        {
+          "w": "date",
+          "start": 71.725,
+          "end": 72.245
+        },
+        {
+          "w": "than",
+          "start": 72.245,
+          "end": 72.764
+        },
+        {
+          "w": "ship",
+          "start": 72.764,
+          "end": 73.284
+        },
+        {
+          "w": "it",
+          "start": 73.284,
+          "end": 73.595
+        },
+        {
+          "w": "as",
+          "start": 73.595,
+          "end": 73.907
+        },
+        {
+          "w": "it",
+          "start": 73.907,
+          "end": 74.219
+        },
+        {
+          "w": "stands.",
+          "start": 74.219,
+          "end": 75.05
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "start": 78.2,
+      "end": 85.7,
+      "channel": "ch1",
+      "text": "Sam has been looking at the queue behaviour. Do you want to take that part?",
+      "words": [
+        {
+          "w": "Sam",
+          "start": 78.2,
+          "end": 78.595
+        },
+        {
+          "w": "has",
+          "start": 78.595,
+          "end": 78.989
+        },
+        {
+          "w": "been",
+          "start": 78.989,
+          "end": 79.483
+        },
+        {
+          "w": "looking",
+          "start": 79.483,
+          "end": 80.272
+        },
+        {
+          "w": "at",
+          "start": 80.272,
+          "end": 80.568
+        },
+        {
+          "w": "the",
+          "start": 80.568,
+          "end": 80.963
+        },
+        {
+          "w": "queue",
+          "start": 80.963,
+          "end": 81.555
+        },
+        {
+          "w": "behaviour.",
+          "start": 81.555,
+          "end": 82.641
+        },
+        {
+          "w": "Do",
+          "start": 82.641,
+          "end": 82.937
+        },
+        {
+          "w": "you",
+          "start": 82.937,
+          "end": 83.332
+        },
+        {
+          "w": "want",
+          "start": 83.332,
+          "end": 83.825
+        },
+        {
+          "w": "to",
+          "start": 83.825,
+          "end": 84.121
+        },
+        {
+          "w": "take",
+          "start": 84.121,
+          "end": 84.614
+        },
+        {
+          "w": "that",
+          "start": 84.614,
+          "end": 85.108
+        },
+        {
+          "w": "part?",
+          "start": 85.108,
+          "end": 85.7
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "start": 88.22,
+      "end": 96.22,
+      "channel": "ch1",
+      "text": "The backoff is linear right now. Retries go out at one minute, two minutes, three minutes.",
+      "words": [
+        {
+          "w": "The",
+          "start": 88.22,
+          "end": 88.572
+        },
+        {
+          "w": "backoff",
+          "start": 88.572,
+          "end": 89.275
+        },
+        {
+          "w": "is",
+          "start": 89.275,
+          "end": 89.539
+        },
+        {
+          "w": "linear",
+          "start": 89.539,
+          "end": 90.154
+        },
+        {
+          "w": "right",
+          "start": 90.154,
+          "end": 90.682
+        },
+        {
+          "w": "now.",
+          "start": 90.682,
+          "end": 91.121
+        },
+        {
+          "w": "Retries",
+          "start": 91.121,
+          "end": 91.824
+        },
+        {
+          "w": "go",
+          "start": 91.824,
+          "end": 92.088
+        },
+        {
+          "w": "out",
+          "start": 92.088,
+          "end": 92.44
+        },
+        {
+          "w": "at",
+          "start": 92.44,
+          "end": 92.704
+        },
+        {
+          "w": "one",
+          "start": 92.704,
+          "end": 93.055
+        },
+        {
+          "w": "minute,",
+          "start": 93.055,
+          "end": 93.758
+        },
+        {
+          "w": "two",
+          "start": 93.758,
+          "end": 94.11
+        },
+        {
+          "w": "minutes,",
+          "start": 94.11,
+          "end": 94.901
+        },
+        {
+          "w": "three",
+          "start": 94.901,
+          "end": 95.429
+        },
+        {
+          "w": "minutes.",
+          "start": 95.429,
+          "end": 96.22
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "start": 101.26,
+      "end": 108.76,
+      "channel": "ch1",
+      "text": "By the time the fourth retry lands, Stripe has already given up on the event.",
+      "words": [
+        {
+          "w": "By",
+          "start": 101.26,
+          "end": 101.548
+        },
+        {
+          "w": "the",
+          "start": 101.548,
+          "end": 101.933
+        },
+        {
+          "w": "time",
+          "start": 101.933,
+          "end": 102.414
+        },
+        {
+          "w": "the",
+          "start": 102.414,
+          "end": 102.798
+        },
+        {
+          "w": "fourth",
+          "start": 102.798,
+          "end": 103.472
+        },
+        {
+          "w": "retry",
+          "start": 103.472,
+          "end": 104.048
+        },
+        {
+          "w": "lands,",
+          "start": 104.048,
+          "end": 104.722
+        },
+        {
+          "w": "Stripe",
+          "start": 104.722,
+          "end": 105.395
+        },
+        {
+          "w": "has",
+          "start": 105.395,
+          "end": 105.779
+        },
+        {
+          "w": "already",
+          "start": 105.779,
+          "end": 106.548
+        },
+        {
+          "w": "given",
+          "start": 106.548,
+          "end": 107.125
+        },
+        {
+          "w": "up",
+          "start": 107.125,
+          "end": 107.414
+        },
+        {
+          "w": "on",
+          "start": 107.414,
+          "end": 107.702
+        },
+        {
+          "w": "the",
+          "start": 107.702,
+          "end": 108.087
+        },
+        {
+          "w": "event.",
+          "start": 108.087,
+          "end": 108.76
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "start": 110.65,
+      "end": 115.15,
+      "channel": "ch0",
+      "text": "So we should move to exponential backoff with jitter?",
+      "words": [
+        {
+          "w": "So",
+          "start": 110.65,
+          "end": 110.9
+        },
+        {
+          "w": "we",
+          "start": 110.9,
+          "end": 111.15
+        },
+        {
+          "w": "should",
+          "start": 111.15,
+          "end": 111.733
+        },
+        {
+          "w": "move",
+          "start": 111.733,
+          "end": 112.15
+        },
+        {
+          "w": "to",
+          "start": 112.15,
+          "end": 112.4
+        },
+        {
+          "w": "exponential",
+          "start": 112.4,
+          "end": 113.4
+        },
+        {
+          "w": "backoff",
+          "start": 113.4,
+          "end": 114.067
+        },
+        {
+          "w": "with",
+          "start": 114.067,
+          "end": 114.483
+        },
+        {
+          "w": "jitter?",
+          "start": 114.483,
+          "end": 115.15
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "start": 118.93,
+      "end": 124.93,
+      "channel": "ch1",
+      "text": "Yes. And add a dead letter queue so nothing is dropped silently.",
+      "words": [
+        {
+          "w": "Yes.",
+          "start": 118.93,
+          "end": 119.392
+        },
+        {
+          "w": "And",
+          "start": 119.392,
+          "end": 119.761
+        },
+        {
+          "w": "add",
+          "start": 119.761,
+          "end": 120.13
+        },
+        {
+          "w": "a",
+          "start": 120.13,
+          "end": 120.315
+        },
+        {
+          "w": "dead",
+          "start": 120.315,
+          "end": 120.776
+        },
+        {
+          "w": "letter",
+          "start": 120.776,
+          "end": 121.422
+        },
+        {
+          "w": "queue",
+          "start": 121.422,
+          "end": 121.976
+        },
+        {
+          "w": "so",
+          "start": 121.976,
+          "end": 122.253
+        },
+        {
+          "w": "nothing",
+          "start": 122.253,
+          "end": 122.992
+        },
+        {
+          "w": "is",
+          "start": 122.992,
+          "end": 123.268
+        },
+        {
+          "w": "dropped",
+          "start": 123.268,
+          "end": 124.007
+        },
+        {
+          "w": "silently.",
+          "start": 124.007,
+          "end": 124.93
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "start": 127.45,
+      "end": 130.45,
+      "channel": "ch0",
+      "text": "Who owns that piece of work?",
+      "words": [
+        {
+          "w": "Who",
+          "start": 127.45,
+          "end": 127.864
+        },
+        {
+          "w": "owns",
+          "start": 127.864,
+          "end": 128.381
+        },
+        {
+          "w": "that",
+          "start": 128.381,
+          "end": 128.898
+        },
+        {
+          "w": "piece",
+          "start": 128.898,
+          "end": 129.519
+        },
+        {
+          "w": "of",
+          "start": 129.519,
+          "end": 129.829
+        },
+        {
+          "w": "work?",
+          "start": 129.829,
+          "end": 130.45
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "start": 135.175,
+      "end": 141.675,
+      "channel": "ch1",
+      "text": "I will fix the backoff and add the dead letter queue by Friday.",
+      "words": [
+        {
+          "w": "I",
+          "start": 135.175,
+          "end": 135.378
+        },
+        {
+          "w": "will",
+          "start": 135.378,
+          "end": 135.886
+        },
+        {
+          "w": "fix",
+          "start": 135.886,
+          "end": 136.292
+        },
+        {
+          "w": "the",
+          "start": 136.292,
+          "end": 136.698
+        },
+        {
+          "w": "backoff",
+          "start": 136.698,
+          "end": 137.511
+        },
+        {
+          "w": "and",
+          "start": 137.511,
+          "end": 137.917
+        },
+        {
+          "w": "add",
+          "start": 137.917,
+          "end": 138.323
+        },
+        {
+          "w": "the",
+          "start": 138.323,
+          "end": 138.73
+        },
+        {
+          "w": "dead",
+          "start": 138.73,
+          "end": 139.237
+        },
+        {
+          "w": "letter",
+          "start": 139.237,
+          "end": 139.948
+        },
+        {
+          "w": "queue",
+          "start": 139.948,
+          "end": 140.558
+        },
+        {
+          "w": "by",
+          "start": 140.558,
+          "end": 140.862
+        },
+        {
+          "w": "Friday.",
+          "start": 140.862,
+          "end": 141.675
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "start": 143.565,
+      "end": 146.565,
+      "channel": "ch0",
+      "text": "Good. Does that push the launch?",
+      "words": [
+        {
+          "w": "Good.",
+          "start": 143.565,
+          "end": 144.11
+        },
+        {
+          "w": "Does",
+          "start": 144.11,
+          "end": 144.565
+        },
+        {
+          "w": "that",
+          "start": 144.565,
+          "end": 145.02
+        },
+        {
+          "w": "push",
+          "start": 145.02,
+          "end": 145.474
+        },
+        {
+          "w": "the",
+          "start": 145.474,
+          "end": 145.838
+        },
+        {
+          "w": "launch?",
+          "start": 145.838,
+          "end": 146.565
+        }
+      ]
+    },
+    {
+      "id": "s17",
+      "start": 150.03,
+      "end": 158.03,
+      "channel": "ch1",
+      "text": "It pushes it a week. Not because of the code, because of the soak test afterwards.",
+      "words": [
+        {
+          "w": "It",
+          "start": 150.03,
+          "end": 150.319
+        },
+        {
+          "w": "pushes",
+          "start": 150.319,
+          "end": 150.994
+        },
+        {
+          "w": "it",
+          "start": 150.994,
+          "end": 151.283
+        },
+        {
+          "w": "a",
+          "start": 151.283,
+          "end": 151.476
+        },
+        {
+          "w": "week.",
+          "start": 151.476,
+          "end": 152.054
+        },
+        {
+          "w": "Not",
+          "start": 152.054,
+          "end": 152.44
+        },
+        {
+          "w": "because",
+          "start": 152.44,
+          "end": 153.211
+        },
+        {
+          "w": "of",
+          "start": 153.211,
+          "end": 153.5
+        },
+        {
+          "w": "the",
+          "start": 153.5,
+          "end": 153.885
+        },
+        {
+          "w": "code,",
+          "start": 153.885,
+          "end": 154.464
+        },
+        {
+          "w": "because",
+          "start": 154.464,
+          "end": 155.235
+        },
+        {
+          "w": "of",
+          "start": 155.235,
+          "end": 155.524
+        },
+        {
+          "w": "the",
+          "start": 155.524,
+          "end": 155.91
+        },
+        {
+          "w": "soak",
+          "start": 155.91,
+          "end": 156.391
+        },
+        {
+          "w": "test",
+          "start": 156.391,
+          "end": 156.873
+        },
+        {
+          "w": "afterwards.",
+          "start": 156.873,
+          "end": 158.03
+        }
+      ]
+    },
+    {
+      "id": "s18",
+      "start": 160.235,
+      "end": 163.735,
+      "channel": "ch0",
+      "text": "How long does the soak test need?",
+      "words": [
+        {
+          "w": "How",
+          "start": 160.235,
+          "end": 160.647
+        },
+        {
+          "w": "long",
+          "start": 160.647,
+          "end": 161.161
+        },
+        {
+          "w": "does",
+          "start": 161.161,
+          "end": 161.676
+        },
+        {
+          "w": "the",
+          "start": 161.676,
+          "end": 162.088
+        },
+        {
+          "w": "soak",
+          "start": 162.088,
+          "end": 162.603
+        },
+        {
+          "w": "test",
+          "start": 162.603,
+          "end": 163.117
+        },
+        {
+          "w": "need?",
+          "start": 163.117,
+          "end": 163.735
+        }
+      ]
+    },
+    {
+      "id": "s19",
+      "start": 166.57,
+      "end": 174.07,
+      "channel": "ch1",
+      "text": "Five working days, minimum. I do not want to discover a queue problem in production.",
+      "words": [
+        {
+          "w": "Five",
+          "start": 166.57,
+          "end": 167.011
+        },
+        {
+          "w": "working",
+          "start": 167.011,
+          "end": 167.717
+        },
+        {
+          "w": "days,",
+          "start": 167.717,
+          "end": 168.246
+        },
+        {
+          "w": "minimum.",
+          "start": 168.246,
+          "end": 169.041
+        },
+        {
+          "w": "I",
+          "start": 169.041,
+          "end": 169.217
+        },
+        {
+          "w": "do",
+          "start": 169.217,
+          "end": 169.482
+        },
+        {
+          "w": "not",
+          "start": 169.482,
+          "end": 169.835
+        },
+        {
+          "w": "want",
+          "start": 169.835,
+          "end": 170.276
+        },
+        {
+          "w": "to",
+          "start": 170.276,
+          "end": 170.541
+        },
+        {
+          "w": "discover",
+          "start": 170.541,
+          "end": 171.335
+        },
+        {
+          "w": "a",
+          "start": 171.335,
+          "end": 171.511
+        },
+        {
+          "w": "queue",
+          "start": 171.511,
+          "end": 172.041
+        },
+        {
+          "w": "problem",
+          "start": 172.041,
+          "end": 172.746
+        },
+        {
+          "w": "in",
+          "start": 172.746,
+          "end": 173.011
+        },
+        {
+          "w": "production.",
+          "start": 173.011,
+          "end": 174.07
+        }
+      ]
+    },
+    {
+      "id": "s20",
+      "start": 178.48,
+      "end": 185.48,
+      "channel": "ch0",
+      "text": "Agreed. Let us call the launch the twentieth and freeze feature work until then.",
+      "words": [
+        {
+          "w": "Agreed.",
+          "start": 178.48,
+          "end": 179.171
+        },
+        {
+          "w": "Let",
+          "start": 179.171,
+          "end": 179.517
+        },
+        {
+          "w": "us",
+          "start": 179.517,
+          "end": 179.776
+        },
+        {
+          "w": "call",
+          "start": 179.776,
+          "end": 180.208
+        },
+        {
+          "w": "the",
+          "start": 180.208,
+          "end": 180.554
+        },
+        {
+          "w": "launch",
+          "start": 180.554,
+          "end": 181.159
+        },
+        {
+          "w": "the",
+          "start": 181.159,
+          "end": 181.505
+        },
+        {
+          "w": "twentieth",
+          "start": 181.505,
+          "end": 182.369
+        },
+        {
+          "w": "and",
+          "start": 182.369,
+          "end": 182.715
+        },
+        {
+          "w": "freeze",
+          "start": 182.715,
+          "end": 183.32
+        },
+        {
+          "w": "feature",
+          "start": 183.32,
+          "end": 184.011
+        },
+        {
+          "w": "work",
+          "start": 184.011,
+          "end": 184.443
+        },
+        {
+          "w": "until",
+          "start": 184.443,
+          "end": 184.961
+        },
+        {
+          "w": "then.",
+          "start": 184.961,
+          "end": 185.48
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "start": 188.63,
+      "end": 194.63,
+      "channel": "ch1",
+      "text": "I will update the release calendar today and tell support what changed.",
+      "words": [
+        {
+          "w": "I",
+          "start": 188.63,
+          "end": 188.797
+        },
+        {
+          "w": "will",
+          "start": 188.797,
+          "end": 189.213
+        },
+        {
+          "w": "update",
+          "start": 189.213,
+          "end": 189.797
+        },
+        {
+          "w": "the",
+          "start": 189.797,
+          "end": 190.13
+        },
+        {
+          "w": "release",
+          "start": 190.13,
+          "end": 190.797
+        },
+        {
+          "w": "calendar",
+          "start": 190.797,
+          "end": 191.547
+        },
+        {
+          "w": "today",
+          "start": 191.547,
+          "end": 192.047
+        },
+        {
+          "w": "and",
+          "start": 192.047,
+          "end": 192.38
+        },
+        {
+          "w": "tell",
+          "start": 192.38,
+          "end": 192.797
+        },
+        {
+          "w": "support",
+          "start": 192.797,
+          "end": 193.463
+        },
+        {
+          "w": "what",
+          "start": 193.463,
+          "end": 193.88
+        },
+        {
+          "w": "changed.",
+          "start": 193.88,
+          "end": 194.63
+        }
+      ]
+    },
+    {
+      "id": "s22",
+      "start": 197.15,
+      "end": 203.65,
+      "channel": "ch0",
+      "text": "Speaking of support, they need a runbook for replaying a dead lettered event.",
+      "words": [
+        {
+          "w": "Speaking",
+          "start": 197.15,
+          "end": 197.9
+        },
+        {
+          "w": "of",
+          "start": 197.9,
+          "end": 198.15
+        },
+        {
+          "w": "support,",
+          "start": 198.15,
+          "end": 198.9
+        },
+        {
+          "w": "they",
+          "start": 198.9,
+          "end": 199.317
+        },
+        {
+          "w": "need",
+          "start": 199.317,
+          "end": 199.733
+        },
+        {
+          "w": "a",
+          "start": 199.733,
+          "end": 199.9
+        },
+        {
+          "w": "runbook",
+          "start": 199.9,
+          "end": 200.567
+        },
+        {
+          "w": "for",
+          "start": 200.567,
+          "end": 200.9
+        },
+        {
+          "w": "replaying",
+          "start": 200.9,
+          "end": 201.733
+        },
+        {
+          "w": "a",
+          "start": 201.733,
+          "end": 201.9
+        },
+        {
+          "w": "dead",
+          "start": 201.9,
+          "end": 202.317
+        },
+        {
+          "w": "lettered",
+          "start": 202.317,
+          "end": 203.067
+        },
+        {
+          "w": "event.",
+          "start": 203.067,
+          "end": 203.65
+        }
+      ]
+    },
+    {
+      "id": "s23",
+      "start": 208.69,
+      "end": 214.19,
+      "channel": "ch1",
+      "text": "That is the part nobody has thought about. Who writes it?",
+      "words": [
+        {
+          "w": "That",
+          "start": 208.69,
+          "end": 209.164
+        },
+        {
+          "w": "is",
+          "start": 209.164,
+          "end": 209.449
+        },
+        {
+          "w": "the",
+          "start": 209.449,
+          "end": 209.828
+        },
+        {
+          "w": "part",
+          "start": 209.828,
+          "end": 210.302
+        },
+        {
+          "w": "nobody",
+          "start": 210.302,
+          "end": 210.966
+        },
+        {
+          "w": "has",
+          "start": 210.966,
+          "end": 211.345
+        },
+        {
+          "w": "thought",
+          "start": 211.345,
+          "end": 212.104
+        },
+        {
+          "w": "about.",
+          "start": 212.104,
+          "end": 212.768
+        },
+        {
+          "w": "Who",
+          "start": 212.768,
+          "end": 213.147
+        },
+        {
+          "w": "writes",
+          "start": 213.147,
+          "end": 213.811
+        },
+        {
+          "w": "it?",
+          "start": 213.811,
+          "end": 214.19
+        }
+      ]
+    },
+    {
+      "id": "s24",
+      "start": 216.08,
+      "end": 221.58,
+      "channel": "ch0",
+      "text": "Can you draft it? You know the queue better than anyone.",
+      "words": [
+        {
+          "w": "Can",
+          "start": 216.08,
+          "end": 216.466
+        },
+        {
+          "w": "you",
+          "start": 216.466,
+          "end": 216.852
+        },
+        {
+          "w": "draft",
+          "start": 216.852,
+          "end": 217.431
+        },
+        {
+          "w": "it?",
+          "start": 217.431,
+          "end": 217.817
+        },
+        {
+          "w": "You",
+          "start": 217.817,
+          "end": 218.203
+        },
+        {
+          "w": "know",
+          "start": 218.203,
+          "end": 218.685
+        },
+        {
+          "w": "the",
+          "start": 218.685,
+          "end": 219.071
+        },
+        {
+          "w": "queue",
+          "start": 219.071,
+          "end": 219.65
+        },
+        {
+          "w": "better",
+          "start": 219.65,
+          "end": 220.326
+        },
+        {
+          "w": "than",
+          "start": 220.326,
+          "end": 220.808
+        },
+        {
+          "w": "anyone.",
+          "start": 220.808,
+          "end": 221.58
+        }
+      ]
+    },
+    {
+      "id": "s25",
+      "start": 225.36,
+      "end": 234.36,
+      "channel": "ch1",
+      "text": "I can draft it, but I need sandbox access to Stripe first, and I do not have it.",
+      "words": [
+        {
+          "w": "I",
+          "start": 225.36,
+          "end": 225.582
+        },
+        {
+          "w": "can",
+          "start": 225.582,
+          "end": 226.027
+        },
+        {
+          "w": "draft",
+          "start": 226.027,
+          "end": 226.693
+        },
+        {
+          "w": "it,",
+          "start": 226.693,
+          "end": 227.138
+        },
+        {
+          "w": "but",
+          "start": 227.138,
+          "end": 227.582
+        },
+        {
+          "w": "I",
+          "start": 227.582,
+          "end": 227.804
+        },
+        {
+          "w": "need",
+          "start": 227.804,
+          "end": 228.36
+        },
+        {
+          "w": "sandbox",
+          "start": 228.36,
+          "end": 229.249
+        },
+        {
+          "w": "access",
+          "start": 229.249,
+          "end": 230.027
+        },
+        {
+          "w": "to",
+          "start": 230.027,
+          "end": 230.36
+        },
+        {
+          "w": "Stripe",
+          "start": 230.36,
+          "end": 231.138
+        },
+        {
+          "w": "first,",
+          "start": 231.138,
+          "end": 231.916
+        },
+        {
+          "w": "and",
+          "start": 231.916,
+          "end": 232.36
+        },
+        {
+          "w": "I",
+          "start": 232.36,
+          "end": 232.582
+        },
+        {
+          "w": "do",
+          "start": 232.582,
+          "end": 232.916
+        },
+        {
+          "w": "not",
+          "start": 232.916,
+          "end": 233.36
+        },
+        {
+          "w": "have",
+          "start": 233.36,
+          "end": 233.916
+        },
+        {
+          "w": "it.",
+          "start": 233.916,
+          "end": 234.36
+        }
+      ]
+    },
+    {
+      "id": "s26",
+      "start": 236.88,
+      "end": 243.88,
+      "channel": "ch0",
+      "text": "I will chase that with finance today. It is usually a billing owner approval.",
+      "words": [
+        {
+          "w": "I",
+          "start": 236.88,
+          "end": 237.059
+        },
+        {
+          "w": "will",
+          "start": 237.059,
+          "end": 237.508
+        },
+        {
+          "w": "chase",
+          "start": 237.508,
+          "end": 238.047
+        },
+        {
+          "w": "that",
+          "start": 238.047,
+          "end": 238.495
+        },
+        {
+          "w": "with",
+          "start": 238.495,
+          "end": 238.944
+        },
+        {
+          "w": "finance",
+          "start": 238.944,
+          "end": 239.662
+        },
+        {
+          "w": "today.",
+          "start": 239.662,
+          "end": 240.29
+        },
+        {
+          "w": "It",
+          "start": 240.29,
+          "end": 240.559
+        },
+        {
+          "w": "is",
+          "start": 240.559,
+          "end": 240.829
+        },
+        {
+          "w": "usually",
+          "start": 240.829,
+          "end": 241.547
+        },
+        {
+          "w": "a",
+          "start": 241.547,
+          "end": 241.726
+        },
+        {
+          "w": "billing",
+          "start": 241.726,
+          "end": 242.444
+        },
+        {
+          "w": "owner",
+          "start": 242.444,
+          "end": 242.983
+        },
+        {
+          "w": "approval.",
+          "start": 242.983,
+          "end": 243.88
+        }
+      ]
+    },
+    {
+      "id": "s27",
+      "start": 248.605,
+      "end": 255.605,
+      "channel": "ch1",
+      "text": "Then I will write the runbook once I have access, probably early next week.",
+      "words": [
+        {
+          "w": "Then",
+          "start": 248.605,
+          "end": 249.066
+        },
+        {
+          "w": "I",
+          "start": 249.066,
+          "end": 249.25
+        },
+        {
+          "w": "will",
+          "start": 249.25,
+          "end": 249.71
+        },
+        {
+          "w": "write",
+          "start": 249.71,
+          "end": 250.263
+        },
+        {
+          "w": "the",
+          "start": 250.263,
+          "end": 250.631
+        },
+        {
+          "w": "runbook",
+          "start": 250.631,
+          "end": 251.368
+        },
+        {
+          "w": "once",
+          "start": 251.368,
+          "end": 251.829
+        },
+        {
+          "w": "I",
+          "start": 251.829,
+          "end": 252.013
+        },
+        {
+          "w": "have",
+          "start": 252.013,
+          "end": 252.473
+        },
+        {
+          "w": "access,",
+          "start": 252.473,
+          "end": 253.21
+        },
+        {
+          "w": "probably",
+          "start": 253.21,
+          "end": 254.039
+        },
+        {
+          "w": "early",
+          "start": 254.039,
+          "end": 254.592
+        },
+        {
+          "w": "next",
+          "start": 254.592,
+          "end": 255.052
+        },
+        {
+          "w": "week.",
+          "start": 255.052,
+          "end": 255.605
+        }
+      ]
+    },
+    {
+      "id": "s28",
+      "start": 257.495,
+      "end": 263.495,
+      "channel": "ch0",
+      "text": "What is the rollout going to look like? Big bang or gradual?",
+      "words": [
+        {
+          "w": "What",
+          "start": 257.495,
+          "end": 257.987
+        },
+        {
+          "w": "is",
+          "start": 257.987,
+          "end": 258.282
+        },
+        {
+          "w": "the",
+          "start": 258.282,
+          "end": 258.675
+        },
+        {
+          "w": "rollout",
+          "start": 258.675,
+          "end": 259.462
+        },
+        {
+          "w": "going",
+          "start": 259.462,
+          "end": 260.052
+        },
+        {
+          "w": "to",
+          "start": 260.052,
+          "end": 260.347
+        },
+        {
+          "w": "look",
+          "start": 260.347,
+          "end": 260.839
+        },
+        {
+          "w": "like?",
+          "start": 260.839,
+          "end": 261.429
+        },
+        {
+          "w": "Big",
+          "start": 261.429,
+          "end": 261.823
+        },
+        {
+          "w": "bang",
+          "start": 261.823,
+          "end": 262.315
+        },
+        {
+          "w": "or",
+          "start": 262.315,
+          "end": 262.61
+        },
+        {
+          "w": "gradual?",
+          "start": 262.61,
+          "end": 263.495
+        }
+      ]
+    },
+    {
+      "id": "s29",
+      "start": 266.96,
+      "end": 272.96,
+      "channel": "ch1",
+      "text": "Gradual. Ten percent of accounts for a day, then fifty, then everything.",
+      "words": [
+        {
+          "w": "Gradual.",
+          "start": 266.96,
+          "end": 267.7
+        },
+        {
+          "w": "Ten",
+          "start": 267.7,
+          "end": 268.028
+        },
+        {
+          "w": "percent",
+          "start": 268.028,
+          "end": 268.686
+        },
+        {
+          "w": "of",
+          "start": 268.686,
+          "end": 268.933
+        },
+        {
+          "w": "accounts",
+          "start": 268.933,
+          "end": 269.672
+        },
+        {
+          "w": "for",
+          "start": 269.672,
+          "end": 270.001
+        },
+        {
+          "w": "a",
+          "start": 270.001,
+          "end": 270.165
+        },
+        {
+          "w": "day,",
+          "start": 270.165,
+          "end": 270.576
+        },
+        {
+          "w": "then",
+          "start": 270.576,
+          "end": 270.987
+        },
+        {
+          "w": "fifty,",
+          "start": 270.987,
+          "end": 271.563
+        },
+        {
+          "w": "then",
+          "start": 271.563,
+          "end": 271.974
+        },
+        {
+          "w": "everything.",
+          "start": 271.974,
+          "end": 272.96
+        }
+      ]
+    },
+    {
+      "id": "s30",
+      "start": 275.165,
+      "end": 283.665,
+      "channel": "ch1",
+      "text": "That way if the dead letter queue fills up we find out while it is still small.",
+      "words": [
+        {
+          "w": "That",
+          "start": 275.165,
+          "end": 275.696
+        },
+        {
+          "w": "way",
+          "start": 275.696,
+          "end": 276.121
+        },
+        {
+          "w": "if",
+          "start": 276.121,
+          "end": 276.44
+        },
+        {
+          "w": "the",
+          "start": 276.44,
+          "end": 276.865
+        },
+        {
+          "w": "dead",
+          "start": 276.865,
+          "end": 277.396
+        },
+        {
+          "w": "letter",
+          "start": 277.396,
+          "end": 278.14
+        },
+        {
+          "w": "queue",
+          "start": 278.14,
+          "end": 278.777
+        },
+        {
+          "w": "fills",
+          "start": 278.777,
+          "end": 279.415
+        },
+        {
+          "w": "up",
+          "start": 279.415,
+          "end": 279.734
+        },
+        {
+          "w": "we",
+          "start": 279.734,
+          "end": 280.053
+        },
+        {
+          "w": "find",
+          "start": 280.053,
+          "end": 280.584
+        },
+        {
+          "w": "out",
+          "start": 280.584,
+          "end": 281.009
+        },
+        {
+          "w": "while",
+          "start": 281.009,
+          "end": 281.646
+        },
+        {
+          "w": "it",
+          "start": 281.646,
+          "end": 281.965
+        },
+        {
+          "w": "is",
+          "start": 281.965,
+          "end": 282.284
+        },
+        {
+          "w": "still",
+          "start": 282.284,
+          "end": 282.921
+        },
+        {
+          "w": "small.",
+          "start": 282.921,
+          "end": 283.665
+        }
+      ]
+    },
+    {
+      "id": "s31",
+      "start": 286.5,
+      "end": 292.0,
+      "channel": "ch0",
+      "text": "Do we have a way to see the queue filling up?",
+      "words": [
+        {
+          "w": "Do",
+          "start": 286.5,
+          "end": 286.859
+        },
+        {
+          "w": "we",
+          "start": 286.859,
+          "end": 287.217
+        },
+        {
+          "w": "have",
+          "start": 287.217,
+          "end": 287.815
+        },
+        {
+          "w": "a",
+          "start": 287.815,
+          "end": 288.054
+        },
+        {
+          "w": "way",
+          "start": 288.054,
+          "end": 288.533
+        },
+        {
+          "w": "to",
+          "start": 288.533,
+          "end": 288.891
+        },
+        {
+          "w": "see",
+          "start": 288.891,
+          "end": 289.37
+        },
+        {
+          "w": "the",
+          "start": 289.37,
+          "end": 289.848
+        },
+        {
+          "w": "queue",
+          "start": 289.848,
+          "end": 290.565
+        },
+        {
+          "w": "filling",
+          "start": 290.565,
+          "end": 291.522
+        },
+        {
+          "w": "up?",
+          "start": 291.522,
+          "end": 292.0
+        }
+      ]
+    },
+    {
+      "id": "s32",
+      "start": 296.41,
+      "end": 302.41,
+      "channel": "ch1",
+      "text": "Not really. There is a dashboard for throughput but nothing for failures.",
+      "words": [
+        {
+          "w": "Not",
+          "start": 296.41,
+          "end": 296.734
+        },
+        {
+          "w": "really.",
+          "start": 296.734,
+          "end": 297.383
+        },
+        {
+          "w": "There",
+          "start": 297.383,
+          "end": 297.869
+        },
+        {
+          "w": "is",
+          "start": 297.869,
+          "end": 298.113
+        },
+        {
+          "w": "a",
+          "start": 298.113,
+          "end": 298.275
+        },
+        {
+          "w": "dashboard",
+          "start": 298.275,
+          "end": 299.086
+        },
+        {
+          "w": "for",
+          "start": 299.086,
+          "end": 299.41
+        },
+        {
+          "w": "throughput",
+          "start": 299.41,
+          "end": 300.302
+        },
+        {
+          "w": "but",
+          "start": 300.302,
+          "end": 300.626
+        },
+        {
+          "w": "nothing",
+          "start": 300.626,
+          "end": 301.275
+        },
+        {
+          "w": "for",
+          "start": 301.275,
+          "end": 301.599
+        },
+        {
+          "w": "failures.",
+          "start": 301.599,
+          "end": 302.41
+        }
+      ]
+    },
+    {
+      "id": "s33",
+      "start": 305.56,
+      "end": 311.56,
+      "channel": "ch0",
+      "text": "So we need metrics on the queue depth and the failure count.",
+      "words": [
+        {
+          "w": "So",
+          "start": 305.56,
+          "end": 305.855
+        },
+        {
+          "w": "we",
+          "start": 305.855,
+          "end": 306.15
+        },
+        {
+          "w": "need",
+          "start": 306.15,
+          "end": 306.642
+        },
+        {
+          "w": "metrics",
+          "start": 306.642,
+          "end": 307.429
+        },
+        {
+          "w": "on",
+          "start": 307.429,
+          "end": 307.724
+        },
+        {
+          "w": "the",
+          "start": 307.724,
+          "end": 308.117
+        },
+        {
+          "w": "queue",
+          "start": 308.117,
+          "end": 308.708
+        },
+        {
+          "w": "depth",
+          "start": 308.708,
+          "end": 309.298
+        },
+        {
+          "w": "and",
+          "start": 309.298,
+          "end": 309.691
+        },
+        {
+          "w": "the",
+          "start": 309.691,
+          "end": 310.085
+        },
+        {
+          "w": "failure",
+          "start": 310.085,
+          "end": 310.871
+        },
+        {
+          "w": "count.",
+          "start": 310.871,
+          "end": 311.56
+        }
+      ]
+    },
+    {
+      "id": "s34",
+      "start": 314.08,
+      "end": 324.08,
+      "channel": "ch1",
+      "text": "I will add both. It is a small change if I do it at the same time as the backoff.",
+      "words": [
+        {
+          "w": "I",
+          "start": 314.08,
+          "end": 314.324
+        },
+        {
+          "w": "will",
+          "start": 314.324,
+          "end": 314.934
+        },
+        {
+          "w": "add",
+          "start": 314.934,
+          "end": 315.421
+        },
+        {
+          "w": "both.",
+          "start": 315.421,
+          "end": 316.153
+        },
+        {
+          "w": "It",
+          "start": 316.153,
+          "end": 316.519
+        },
+        {
+          "w": "is",
+          "start": 316.519,
+          "end": 316.885
+        },
+        {
+          "w": "a",
+          "start": 316.885,
+          "end": 317.129
+        },
+        {
+          "w": "small",
+          "start": 317.129,
+          "end": 317.86
+        },
+        {
+          "w": "change",
+          "start": 317.86,
+          "end": 318.714
+        },
+        {
+          "w": "if",
+          "start": 318.714,
+          "end": 319.08
+        },
+        {
+          "w": "I",
+          "start": 319.08,
+          "end": 319.324
+        },
+        {
+          "w": "do",
+          "start": 319.324,
+          "end": 319.69
+        },
+        {
+          "w": "it",
+          "start": 319.69,
+          "end": 320.056
+        },
+        {
+          "w": "at",
+          "start": 320.056,
+          "end": 320.421
+        },
+        {
+          "w": "the",
+          "start": 320.421,
+          "end": 320.909
+        },
+        {
+          "w": "same",
+          "start": 320.909,
+          "end": 321.519
+        },
+        {
+          "w": "time",
+          "start": 321.519,
+          "end": 322.129
+        },
+        {
+          "w": "as",
+          "start": 322.129,
+          "end": 322.495
+        },
+        {
+          "w": "the",
+          "start": 322.495,
+          "end": 322.982
+        },
+        {
+          "w": "backoff.",
+          "start": 322.982,
+          "end": 324.08
+        }
+      ]
+    },
+    {
+      "id": "s35",
+      "start": 329.12,
+      "end": 335.62,
+      "channel": "ch0",
+      "text": "What about alerting? I do not want to find out from a customer.",
+      "words": [
+        {
+          "w": "What",
+          "start": 329.12,
+          "end": 329.628
+        },
+        {
+          "w": "about",
+          "start": 329.628,
+          "end": 330.237
+        },
+        {
+          "w": "alerting?",
+          "start": 330.237,
+          "end": 331.253
+        },
+        {
+          "w": "I",
+          "start": 331.253,
+          "end": 331.456
+        },
+        {
+          "w": "do",
+          "start": 331.456,
+          "end": 331.761
+        },
+        {
+          "w": "not",
+          "start": 331.761,
+          "end": 332.167
+        },
+        {
+          "w": "want",
+          "start": 332.167,
+          "end": 332.675
+        },
+        {
+          "w": "to",
+          "start": 332.675,
+          "end": 332.979
+        },
+        {
+          "w": "find",
+          "start": 332.979,
+          "end": 333.487
+        },
+        {
+          "w": "out",
+          "start": 333.487,
+          "end": 333.893
+        },
+        {
+          "w": "from",
+          "start": 333.893,
+          "end": 334.401
+        },
+        {
+          "w": "a",
+          "start": 334.401,
+          "end": 334.604
+        },
+        {
+          "w": "customer.",
+          "start": 334.604,
+          "end": 335.62
+        }
+      ]
+    },
+    {
+      "id": "s36",
+      "start": 337.51,
+      "end": 345.01,
+      "channel": "ch1",
+      "text": "An alert if the dead letter queue is non empty for more than fifteen minutes.",
+      "words": [
+        {
+          "w": "An",
+          "start": 337.51,
+          "end": 337.798
+        },
+        {
+          "w": "alert",
+          "start": 337.798,
+          "end": 338.375
+        },
+        {
+          "w": "if",
+          "start": 338.375,
+          "end": 338.664
+        },
+        {
+          "w": "the",
+          "start": 338.664,
+          "end": 339.048
+        },
+        {
+          "w": "dead",
+          "start": 339.048,
+          "end": 339.529
+        },
+        {
+          "w": "letter",
+          "start": 339.529,
+          "end": 340.202
+        },
+        {
+          "w": "queue",
+          "start": 340.202,
+          "end": 340.779
+        },
+        {
+          "w": "is",
+          "start": 340.779,
+          "end": 341.068
+        },
+        {
+          "w": "non",
+          "start": 341.068,
+          "end": 341.452
+        },
+        {
+          "w": "empty",
+          "start": 341.452,
+          "end": 342.029
+        },
+        {
+          "w": "for",
+          "start": 342.029,
+          "end": 342.414
+        },
+        {
+          "w": "more",
+          "start": 342.414,
+          "end": 342.895
+        },
+        {
+          "w": "than",
+          "start": 342.895,
+          "end": 343.375
+        },
+        {
+          "w": "fifteen",
+          "start": 343.375,
+          "end": 344.145
+        },
+        {
+          "w": "minutes.",
+          "start": 344.145,
+          "end": 345.01
+        }
+      ]
+    },
+    {
+      "id": "s37",
+      "start": 348.79,
+      "end": 353.29,
+      "channel": "ch0",
+      "text": "That sounds about right. Where does the alert go?",
+      "words": [
+        {
+          "w": "That",
+          "start": 348.79,
+          "end": 349.24
+        },
+        {
+          "w": "sounds",
+          "start": 349.24,
+          "end": 349.87
+        },
+        {
+          "w": "about",
+          "start": 349.87,
+          "end": 350.41
+        },
+        {
+          "w": "right.",
+          "start": 350.41,
+          "end": 351.04
+        },
+        {
+          "w": "Where",
+          "start": 351.04,
+          "end": 351.58
+        },
+        {
+          "w": "does",
+          "start": 351.58,
+          "end": 352.03
+        },
+        {
+          "w": "the",
+          "start": 352.03,
+          "end": 352.39
+        },
+        {
+          "w": "alert",
+          "start": 352.39,
+          "end": 352.93
+        },
+        {
+          "w": "go?",
+          "start": 352.93,
+          "end": 353.29
+        }
+      ]
+    },
+    {
+      "id": "s38",
+      "start": 355.81,
+      "end": 363.31,
+      "channel": "ch1",
+      "text": "The billing on call channel. I will add the rotation to the runbook as well.",
+      "words": [
+        {
+          "w": "The",
+          "start": 355.81,
+          "end": 356.2
+        },
+        {
+          "w": "billing",
+          "start": 356.2,
+          "end": 356.979
+        },
+        {
+          "w": "on",
+          "start": 356.979,
+          "end": 357.271
+        },
+        {
+          "w": "call",
+          "start": 357.271,
+          "end": 357.758
+        },
+        {
+          "w": "channel.",
+          "start": 357.758,
+          "end": 358.635
+        },
+        {
+          "w": "I",
+          "start": 358.635,
+          "end": 358.829
+        },
+        {
+          "w": "will",
+          "start": 358.829,
+          "end": 359.316
+        },
+        {
+          "w": "add",
+          "start": 359.316,
+          "end": 359.706
+        },
+        {
+          "w": "the",
+          "start": 359.706,
+          "end": 360.096
+        },
+        {
+          "w": "rotation",
+          "start": 360.096,
+          "end": 360.972
+        },
+        {
+          "w": "to",
+          "start": 360.972,
+          "end": 361.265
+        },
+        {
+          "w": "the",
+          "start": 361.265,
+          "end": 361.654
+        },
+        {
+          "w": "runbook",
+          "start": 361.654,
+          "end": 362.433
+        },
+        {
+          "w": "as",
+          "start": 362.433,
+          "end": 362.726
+        },
+        {
+          "w": "well.",
+          "start": 362.726,
+          "end": 363.31
+        }
+      ]
+    },
+    {
+      "id": "s39",
+      "start": 368.035,
+      "end": 371.035,
+      "channel": "ch0",
+      "text": "Good. What else could surprise us?",
+      "words": [
+        {
+          "w": "Good.",
+          "start": 368.035,
+          "end": 368.549
+        },
+        {
+          "w": "What",
+          "start": 368.549,
+          "end": 368.978
+        },
+        {
+          "w": "else",
+          "start": 368.978,
+          "end": 369.406
+        },
+        {
+          "w": "could",
+          "start": 369.406,
+          "end": 369.921
+        },
+        {
+          "w": "surprise",
+          "start": 369.921,
+          "end": 370.692
+        },
+        {
+          "w": "us?",
+          "start": 370.692,
+          "end": 371.035
+        }
+      ]
+    },
+    {
+      "id": "s40",
+      "start": 372.925,
+      "end": 379.925,
+      "channel": "ch1",
+      "text": "The invoice date uses server time, which is UTC, and customers in Lagos complain.",
+      "words": [
+        {
+          "w": "The",
+          "start": 372.925,
+          "end": 373.266
+        },
+        {
+          "w": "invoice",
+          "start": 373.266,
+          "end": 373.949
+        },
+        {
+          "w": "date",
+          "start": 373.949,
+          "end": 374.376
+        },
+        {
+          "w": "uses",
+          "start": 374.376,
+          "end": 374.803
+        },
+        {
+          "w": "server",
+          "start": 374.803,
+          "end": 375.401
+        },
+        {
+          "w": "time,",
+          "start": 375.401,
+          "end": 375.913
+        },
+        {
+          "w": "which",
+          "start": 375.913,
+          "end": 376.425
+        },
+        {
+          "w": "is",
+          "start": 376.425,
+          "end": 376.681
+        },
+        {
+          "w": "UTC,",
+          "start": 376.681,
+          "end": 377.108
+        },
+        {
+          "w": "and",
+          "start": 377.108,
+          "end": 377.449
+        },
+        {
+          "w": "customers",
+          "start": 377.449,
+          "end": 378.303
+        },
+        {
+          "w": "in",
+          "start": 378.303,
+          "end": 378.559
+        },
+        {
+          "w": "Lagos",
+          "start": 378.559,
+          "end": 379.071
+        },
+        {
+          "w": "complain.",
+          "start": 379.071,
+          "end": 379.925
+        }
+      ]
+    },
+    {
+      "id": "s41",
+      "start": 383.39,
+      "end": 385.39,
+      "channel": "ch0",
+      "text": "How bad is that?",
+      "words": [
+        {
+          "w": "How",
+          "start": 383.39,
+          "end": 383.861
+        },
+        {
+          "w": "bad",
+          "start": 383.861,
+          "end": 384.331
+        },
+        {
+          "w": "is",
+          "start": 384.331,
+          "end": 384.684
+        },
+        {
+          "w": "that?",
+          "start": 384.684,
+          "end": 385.39
+        }
+      ]
+    },
+    {
+      "id": "s42",
+      "start": 387.595,
+      "end": 395.595,
+      "channel": "ch1",
+      "text": "It is a day out for anyone billing near midnight. We had four complaints last month.",
+      "words": [
+        {
+          "w": "It",
+          "start": 387.595,
+          "end": 387.877
+        },
+        {
+          "w": "is",
+          "start": 387.877,
+          "end": 388.16
+        },
+        {
+          "w": "a",
+          "start": 388.16,
+          "end": 388.348
+        },
+        {
+          "w": "day",
+          "start": 388.348,
+          "end": 388.724
+        },
+        {
+          "w": "out",
+          "start": 388.724,
+          "end": 389.101
+        },
+        {
+          "w": "for",
+          "start": 389.101,
+          "end": 389.477
+        },
+        {
+          "w": "anyone",
+          "start": 389.477,
+          "end": 390.136
+        },
+        {
+          "w": "billing",
+          "start": 390.136,
+          "end": 390.889
+        },
+        {
+          "w": "near",
+          "start": 390.889,
+          "end": 391.36
+        },
+        {
+          "w": "midnight.",
+          "start": 391.36,
+          "end": 392.301
+        },
+        {
+          "w": "We",
+          "start": 392.301,
+          "end": 392.583
+        },
+        {
+          "w": "had",
+          "start": 392.583,
+          "end": 392.96
+        },
+        {
+          "w": "four",
+          "start": 392.96,
+          "end": 393.43
+        },
+        {
+          "w": "complaints",
+          "start": 393.43,
+          "end": 394.466
+        },
+        {
+          "w": "last",
+          "start": 394.466,
+          "end": 394.936
+        },
+        {
+          "w": "month.",
+          "start": 394.936,
+          "end": 395.595
+        }
+      ]
+    },
+    {
+      "id": "s43",
+      "start": 398.43,
+      "end": 402.93,
+      "channel": "ch0",
+      "text": "Is that in scope for this launch or separate?",
+      "words": [
+        {
+          "w": "Is",
+          "start": 398.43,
+          "end": 398.723
+        },
+        {
+          "w": "that",
+          "start": 398.723,
+          "end": 399.213
+        },
+        {
+          "w": "in",
+          "start": 399.213,
+          "end": 399.506
+        },
+        {
+          "w": "scope",
+          "start": 399.506,
+          "end": 400.093
+        },
+        {
+          "w": "for",
+          "start": 400.093,
+          "end": 400.484
+        },
+        {
+          "w": "this",
+          "start": 400.484,
+          "end": 400.973
+        },
+        {
+          "w": "launch",
+          "start": 400.973,
+          "end": 401.658
+        },
+        {
+          "w": "or",
+          "start": 401.658,
+          "end": 401.952
+        },
+        {
+          "w": "separate?",
+          "start": 401.952,
+          "end": 402.93
+        }
+      ]
+    },
+    {
+      "id": "s44",
+      "start": 407.34,
+      "end": 416.84,
+      "channel": "ch1",
+      "text": "Separate, but it should be the next thing we do. It is a one line change plus a test.",
+      "words": [
+        {
+          "w": "Separate,",
+          "start": 407.34,
+          "end": 408.445
+        },
+        {
+          "w": "but",
+          "start": 408.445,
+          "end": 408.887
+        },
+        {
+          "w": "it",
+          "start": 408.887,
+          "end": 409.218
+        },
+        {
+          "w": "should",
+          "start": 409.218,
+          "end": 409.991
+        },
+        {
+          "w": "be",
+          "start": 409.991,
+          "end": 410.323
+        },
+        {
+          "w": "the",
+          "start": 410.323,
+          "end": 410.764
+        },
+        {
+          "w": "next",
+          "start": 410.764,
+          "end": 411.317
+        },
+        {
+          "w": "thing",
+          "start": 411.317,
+          "end": 411.98
+        },
+        {
+          "w": "we",
+          "start": 411.98,
+          "end": 412.311
+        },
+        {
+          "w": "do.",
+          "start": 412.311,
+          "end": 412.753
+        },
+        {
+          "w": "It",
+          "start": 412.753,
+          "end": 413.084
+        },
+        {
+          "w": "is",
+          "start": 413.084,
+          "end": 413.416
+        },
+        {
+          "w": "a",
+          "start": 413.416,
+          "end": 413.637
+        },
+        {
+          "w": "one",
+          "start": 413.637,
+          "end": 414.078
+        },
+        {
+          "w": "line",
+          "start": 414.078,
+          "end": 414.631
+        },
+        {
+          "w": "change",
+          "start": 414.631,
+          "end": 415.404
+        },
+        {
+          "w": "plus",
+          "start": 415.404,
+          "end": 415.956
+        },
+        {
+          "w": "a",
+          "start": 415.956,
+          "end": 416.177
+        },
+        {
+          "w": "test.",
+          "start": 416.177,
+          "end": 416.84
+        }
+      ]
+    },
+    {
+      "id": "s45",
+      "start": 419.99,
+      "end": 426.99,
+      "channel": "ch0",
+      "text": "Can you raise it as a ticket today so it does not get lost?",
+      "words": [
+        {
+          "w": "Can",
+          "start": 419.99,
+          "end": 420.457
+        },
+        {
+          "w": "you",
+          "start": 420.457,
+          "end": 420.923
+        },
+        {
+          "w": "raise",
+          "start": 420.923,
+          "end": 421.623
+        },
+        {
+          "w": "it",
+          "start": 421.623,
+          "end": 421.973
+        },
+        {
+          "w": "as",
+          "start": 421.973,
+          "end": 422.323
+        },
+        {
+          "w": "a",
+          "start": 422.323,
+          "end": 422.557
+        },
+        {
+          "w": "ticket",
+          "start": 422.557,
+          "end": 423.373
+        },
+        {
+          "w": "today",
+          "start": 423.373,
+          "end": 424.073
+        },
+        {
+          "w": "so",
+          "start": 424.073,
+          "end": 424.423
+        },
+        {
+          "w": "it",
+          "start": 424.423,
+          "end": 424.773
+        },
+        {
+          "w": "does",
+          "start": 424.773,
+          "end": 425.357
+        },
+        {
+          "w": "not",
+          "start": 425.357,
+          "end": 425.823
+        },
+        {
+          "w": "get",
+          "start": 425.823,
+          "end": 426.29
+        },
+        {
+          "w": "lost?",
+          "start": 426.29,
+          "end": 426.99
+        }
+      ]
+    },
+    {
+      "id": "s46",
+      "start": 429.51,
+      "end": 434.51,
+      "channel": "ch1",
+      "text": "I will raise it before the end of the day.",
+      "words": [
+        {
+          "w": "I",
+          "start": 429.51,
+          "end": 429.743
+        },
+        {
+          "w": "will",
+          "start": 429.743,
+          "end": 430.324
+        },
+        {
+          "w": "raise",
+          "start": 430.324,
+          "end": 431.022
+        },
+        {
+          "w": "it",
+          "start": 431.022,
+          "end": 431.37
+        },
+        {
+          "w": "before",
+          "start": 431.37,
+          "end": 432.184
+        },
+        {
+          "w": "the",
+          "start": 432.184,
+          "end": 432.65
+        },
+        {
+          "w": "end",
+          "start": 432.65,
+          "end": 433.115
+        },
+        {
+          "w": "of",
+          "start": 433.115,
+          "end": 433.463
+        },
+        {
+          "w": "the",
+          "start": 433.463,
+          "end": 433.929
+        },
+        {
+          "w": "day.",
+          "start": 433.929,
+          "end": 434.51
+        }
+      ]
+    },
+    {
+      "id": "s47",
+      "start": 439.55,
+      "end": 446.05,
+      "channel": "ch0",
+      "text": "And the migration script itself? Has it run against a production sized copy?",
+      "words": [
+        {
+          "w": "And",
+          "start": 439.55,
+          "end": 439.888
+        },
+        {
+          "w": "the",
+          "start": 439.888,
+          "end": 440.225
+        },
+        {
+          "w": "migration",
+          "start": 440.225,
+          "end": 441.069
+        },
+        {
+          "w": "script",
+          "start": 441.069,
+          "end": 441.66
+        },
+        {
+          "w": "itself?",
+          "start": 441.66,
+          "end": 442.336
+        },
+        {
+          "w": "Has",
+          "start": 442.336,
+          "end": 442.673
+        },
+        {
+          "w": "it",
+          "start": 442.673,
+          "end": 442.927
+        },
+        {
+          "w": "run",
+          "start": 442.927,
+          "end": 443.264
+        },
+        {
+          "w": "against",
+          "start": 443.264,
+          "end": 443.94
+        },
+        {
+          "w": "a",
+          "start": 443.94,
+          "end": 444.108
+        },
+        {
+          "w": "production",
+          "start": 444.108,
+          "end": 445.037
+        },
+        {
+          "w": "sized",
+          "start": 445.037,
+          "end": 445.544
+        },
+        {
+          "w": "copy?",
+          "start": 445.544,
+          "end": 446.05
+        }
+      ]
+    },
+    {
+      "id": "s48",
+      "start": 447.94,
+      "end": 454.94,
+      "channel": "ch1",
+      "text": "No. That is the other risk. It has only run against the sample database.",
+      "words": [
+        {
+          "w": "No.",
+          "start": 447.94,
+          "end": 448.324
+        },
+        {
+          "w": "That",
+          "start": 448.324,
+          "end": 448.803
+        },
+        {
+          "w": "is",
+          "start": 448.803,
+          "end": 449.091
+        },
+        {
+          "w": "the",
+          "start": 449.091,
+          "end": 449.474
+        },
+        {
+          "w": "other",
+          "start": 449.474,
+          "end": 450.05
+        },
+        {
+          "w": "risk.",
+          "start": 450.05,
+          "end": 450.625
+        },
+        {
+          "w": "It",
+          "start": 450.625,
+          "end": 450.913
+        },
+        {
+          "w": "has",
+          "start": 450.913,
+          "end": 451.296
+        },
+        {
+          "w": "only",
+          "start": 451.296,
+          "end": 451.776
+        },
+        {
+          "w": "run",
+          "start": 451.776,
+          "end": 452.159
+        },
+        {
+          "w": "against",
+          "start": 452.159,
+          "end": 452.926
+        },
+        {
+          "w": "the",
+          "start": 452.926,
+          "end": 453.31
+        },
+        {
+          "w": "sample",
+          "start": 453.31,
+          "end": 453.981
+        },
+        {
+          "w": "database.",
+          "start": 453.981,
+          "end": 454.94
+        }
+      ]
+    },
+    {
+      "id": "s49",
+      "start": 458.72,
+      "end": 460.72,
+      "channel": "ch0",
+      "text": "Who is doing that?",
+      "words": [
+        {
+          "w": "Who",
+          "start": 458.72,
+          "end": 459.141
+        },
+        {
+          "w": "is",
+          "start": 459.141,
+          "end": 459.457
+        },
+        {
+          "w": "doing",
+          "start": 459.457,
+          "end": 460.088
+        },
+        {
+          "w": "that?",
+          "start": 460.088,
+          "end": 460.72
+        }
+      ]
+    },
+    {
+      "id": "s50",
+      "start": 463.24,
+      "end": 470.24,
+      "channel": "ch1",
+      "text": "Sam will, once the sandbox is available. It takes about four hours to run.",
+      "words": [
+        {
+          "w": "Sam",
+          "start": 463.24,
+          "end": 463.613
+        },
+        {
+          "w": "will,",
+          "start": 463.613,
+          "end": 464.173
+        },
+        {
+          "w": "once",
+          "start": 464.173,
+          "end": 464.64
+        },
+        {
+          "w": "the",
+          "start": 464.64,
+          "end": 465.013
+        },
+        {
+          "w": "sandbox",
+          "start": 465.013,
+          "end": 465.76
+        },
+        {
+          "w": "is",
+          "start": 465.76,
+          "end": 466.04
+        },
+        {
+          "w": "available.",
+          "start": 466.04,
+          "end": 467.067
+        },
+        {
+          "w": "It",
+          "start": 467.067,
+          "end": 467.347
+        },
+        {
+          "w": "takes",
+          "start": 467.347,
+          "end": 467.907
+        },
+        {
+          "w": "about",
+          "start": 467.907,
+          "end": 468.467
+        },
+        {
+          "w": "four",
+          "start": 468.467,
+          "end": 468.933
+        },
+        {
+          "w": "hours",
+          "start": 468.933,
+          "end": 469.493
+        },
+        {
+          "w": "to",
+          "start": 469.493,
+          "end": 469.773
+        },
+        {
+          "w": "run.",
+          "start": 469.773,
+          "end": 470.24
+        }
+      ]
+    },
+    {
+      "id": "s51",
+      "start": 474.965,
+      "end": 480.965,
+      "channel": "ch0",
+      "text": "Four hours of blocking work or can it run in the background?",
+      "words": [
+        {
+          "w": "Four",
+          "start": 474.965,
+          "end": 475.457
+        },
+        {
+          "w": "hours",
+          "start": 475.457,
+          "end": 476.047
+        },
+        {
+          "w": "of",
+          "start": 476.047,
+          "end": 476.342
+        },
+        {
+          "w": "blocking",
+          "start": 476.342,
+          "end": 477.227
+        },
+        {
+          "w": "work",
+          "start": 477.227,
+          "end": 477.719
+        },
+        {
+          "w": "or",
+          "start": 477.719,
+          "end": 478.014
+        },
+        {
+          "w": "can",
+          "start": 478.014,
+          "end": 478.408
+        },
+        {
+          "w": "it",
+          "start": 478.408,
+          "end": 478.703
+        },
+        {
+          "w": "run",
+          "start": 478.703,
+          "end": 479.096
+        },
+        {
+          "w": "in",
+          "start": 479.096,
+          "end": 479.391
+        },
+        {
+          "w": "the",
+          "start": 479.391,
+          "end": 479.785
+        },
+        {
+          "w": "background?",
+          "start": 479.785,
+          "end": 480.965
+        }
+      ]
+    },
+    {
+      "id": "s52",
+      "start": 482.855,
+      "end": 488.355,
+      "channel": "ch1",
+      "text": "Background, mostly. It is a batch job with a progress table.",
+      "words": [
+        {
+          "w": "Background,",
+          "start": 482.855,
+          "end": 483.937
+        },
+        {
+          "w": "mostly.",
+          "start": 483.937,
+          "end": 484.658
+        },
+        {
+          "w": "It",
+          "start": 484.658,
+          "end": 484.929
+        },
+        {
+          "w": "is",
+          "start": 484.929,
+          "end": 485.199
+        },
+        {
+          "w": "a",
+          "start": 485.199,
+          "end": 485.38
+        },
+        {
+          "w": "batch",
+          "start": 485.38,
+          "end": 485.921
+        },
+        {
+          "w": "job",
+          "start": 485.921,
+          "end": 486.281
+        },
+        {
+          "w": "with",
+          "start": 486.281,
+          "end": 486.732
+        },
+        {
+          "w": "a",
+          "start": 486.732,
+          "end": 486.912
+        },
+        {
+          "w": "progress",
+          "start": 486.912,
+          "end": 487.724
+        },
+        {
+          "w": "table.",
+          "start": 487.724,
+          "end": 488.355
+        }
+      ]
+    },
+    {
+      "id": "s53",
+      "start": 491.82,
+      "end": 499.82,
+      "channel": "ch0",
+      "text": "Then that is fine. Let us run it Thursday night so we have the results Friday.",
+      "words": [
+        {
+          "w": "Then",
+          "start": 491.82,
+          "end": 492.326
+        },
+        {
+          "w": "that",
+          "start": 492.326,
+          "end": 492.833
+        },
+        {
+          "w": "is",
+          "start": 492.833,
+          "end": 493.136
+        },
+        {
+          "w": "fine.",
+          "start": 493.136,
+          "end": 493.744
+        },
+        {
+          "w": "Let",
+          "start": 493.744,
+          "end": 494.149
+        },
+        {
+          "w": "us",
+          "start": 494.149,
+          "end": 494.453
+        },
+        {
+          "w": "run",
+          "start": 494.453,
+          "end": 494.858
+        },
+        {
+          "w": "it",
+          "start": 494.858,
+          "end": 495.162
+        },
+        {
+          "w": "Thursday",
+          "start": 495.162,
+          "end": 496.073
+        },
+        {
+          "w": "night",
+          "start": 496.073,
+          "end": 496.681
+        },
+        {
+          "w": "so",
+          "start": 496.681,
+          "end": 496.985
+        },
+        {
+          "w": "we",
+          "start": 496.985,
+          "end": 497.288
+        },
+        {
+          "w": "have",
+          "start": 497.288,
+          "end": 497.795
+        },
+        {
+          "w": "the",
+          "start": 497.795,
+          "end": 498.2
+        },
+        {
+          "w": "results",
+          "start": 498.2,
+          "end": 499.01
+        },
+        {
+          "w": "Friday.",
+          "start": 499.01,
+          "end": 499.82
+        }
+      ]
+    },
+    {
+      "id": "s54",
+      "start": 502.025,
+      "end": 509.525,
+      "channel": "ch1",
+      "text": "I will put it in the calendar. Do you want a rollback plan written down?",
+      "words": [
+        {
+          "w": "I",
+          "start": 502.025,
+          "end": 502.23
+        },
+        {
+          "w": "will",
+          "start": 502.23,
+          "end": 502.744
+        },
+        {
+          "w": "put",
+          "start": 502.744,
+          "end": 503.155
+        },
+        {
+          "w": "it",
+          "start": 503.155,
+          "end": 503.463
+        },
+        {
+          "w": "in",
+          "start": 503.463,
+          "end": 503.772
+        },
+        {
+          "w": "the",
+          "start": 503.772,
+          "end": 504.183
+        },
+        {
+          "w": "calendar.",
+          "start": 504.183,
+          "end": 505.21
+        },
+        {
+          "w": "Do",
+          "start": 505.21,
+          "end": 505.518
+        },
+        {
+          "w": "you",
+          "start": 505.518,
+          "end": 505.929
+        },
+        {
+          "w": "want",
+          "start": 505.929,
+          "end": 506.443
+        },
+        {
+          "w": "a",
+          "start": 506.443,
+          "end": 506.648
+        },
+        {
+          "w": "rollback",
+          "start": 506.648,
+          "end": 507.573
+        },
+        {
+          "w": "plan",
+          "start": 507.573,
+          "end": 508.087
+        },
+        {
+          "w": "written",
+          "start": 508.087,
+          "end": 508.909
+        },
+        {
+          "w": "down?",
+          "start": 508.909,
+          "end": 509.525
+        }
+      ]
+    },
+    {
+      "id": "s55",
+      "start": 512.36,
+      "end": 519.36,
+      "channel": "ch0",
+      "text": "Yes. If the migration fails halfway we need to know exactly what to restore.",
+      "words": [
+        {
+          "w": "Yes.",
+          "start": 512.36,
+          "end": 512.815
+        },
+        {
+          "w": "If",
+          "start": 512.815,
+          "end": 513.087
+        },
+        {
+          "w": "the",
+          "start": 513.087,
+          "end": 513.451
+        },
+        {
+          "w": "migration",
+          "start": 513.451,
+          "end": 514.36
+        },
+        {
+          "w": "fails",
+          "start": 514.36,
+          "end": 514.905
+        },
+        {
+          "w": "halfway",
+          "start": 514.905,
+          "end": 515.633
+        },
+        {
+          "w": "we",
+          "start": 515.633,
+          "end": 515.905
+        },
+        {
+          "w": "need",
+          "start": 515.905,
+          "end": 516.36
+        },
+        {
+          "w": "to",
+          "start": 516.36,
+          "end": 516.633
+        },
+        {
+          "w": "know",
+          "start": 516.633,
+          "end": 517.087
+        },
+        {
+          "w": "exactly",
+          "start": 517.087,
+          "end": 517.815
+        },
+        {
+          "w": "what",
+          "start": 517.815,
+          "end": 518.269
+        },
+        {
+          "w": "to",
+          "start": 518.269,
+          "end": 518.542
+        },
+        {
+          "w": "restore.",
+          "start": 518.542,
+          "end": 519.36
+        }
+      ]
+    },
+    {
+      "id": "s56",
+      "start": 523.77,
+      "end": 529.77,
+      "channel": "ch1",
+      "text": "I will write it with the runbook. Same audience, same document probably.",
+      "words": [
+        {
+          "w": "I",
+          "start": 523.77,
+          "end": 523.934
+        },
+        {
+          "w": "will",
+          "start": 523.934,
+          "end": 524.345
+        },
+        {
+          "w": "write",
+          "start": 524.345,
+          "end": 524.838
+        },
+        {
+          "w": "it",
+          "start": 524.838,
+          "end": 525.085
+        },
+        {
+          "w": "with",
+          "start": 525.085,
+          "end": 525.496
+        },
+        {
+          "w": "the",
+          "start": 525.496,
+          "end": 525.825
+        },
+        {
+          "w": "runbook.",
+          "start": 525.825,
+          "end": 526.565
+        },
+        {
+          "w": "Same",
+          "start": 526.565,
+          "end": 526.975
+        },
+        {
+          "w": "audience,",
+          "start": 526.975,
+          "end": 527.797
+        },
+        {
+          "w": "same",
+          "start": 527.797,
+          "end": 528.208
+        },
+        {
+          "w": "document",
+          "start": 528.208,
+          "end": 528.948
+        },
+        {
+          "w": "probably.",
+          "start": 528.948,
+          "end": 529.77
+        }
+      ]
+    },
+    {
+      "id": "s57",
+      "start": 532.92,
+      "end": 540.92,
+      "channel": "ch0",
+      "text": "Good. So the critical path is sandbox access, then the backoff fix, then the soak test.",
+      "words": [
+        {
+          "w": "Good.",
+          "start": 532.92,
+          "end": 533.465
+        },
+        {
+          "w": "So",
+          "start": 533.465,
+          "end": 533.738
+        },
+        {
+          "w": "the",
+          "start": 533.738,
+          "end": 534.102
+        },
+        {
+          "w": "critical",
+          "start": 534.102,
+          "end": 534.92
+        },
+        {
+          "w": "path",
+          "start": 534.92,
+          "end": 535.375
+        },
+        {
+          "w": "is",
+          "start": 535.375,
+          "end": 535.647
+        },
+        {
+          "w": "sandbox",
+          "start": 535.647,
+          "end": 536.375
+        },
+        {
+          "w": "access,",
+          "start": 536.375,
+          "end": 537.102
+        },
+        {
+          "w": "then",
+          "start": 537.102,
+          "end": 537.556
+        },
+        {
+          "w": "the",
+          "start": 537.556,
+          "end": 537.92
+        },
+        {
+          "w": "backoff",
+          "start": 537.92,
+          "end": 538.647
+        },
+        {
+          "w": "fix,",
+          "start": 538.647,
+          "end": 539.102
+        },
+        {
+          "w": "then",
+          "start": 539.102,
+          "end": 539.556
+        },
+        {
+          "w": "the",
+          "start": 539.556,
+          "end": 539.92
+        },
+        {
+          "w": "soak",
+          "start": 539.92,
+          "end": 540.375
+        },
+        {
+          "w": "test.",
+          "start": 540.375,
+          "end": 540.92
+        }
+      ]
+    },
+    {
+      "id": "s58",
+      "start": 543.44,
+      "end": 547.94,
+      "channel": "ch1",
+      "text": "That is right. Everything else can happen in parallel.",
+      "words": [
+        {
+          "w": "That",
+          "start": 543.44,
+          "end": 543.849
+        },
+        {
+          "w": "is",
+          "start": 543.849,
+          "end": 544.095
+        },
+        {
+          "w": "right.",
+          "start": 544.095,
+          "end": 544.667
+        },
+        {
+          "w": "Everything",
+          "start": 544.667,
+          "end": 545.567
+        },
+        {
+          "w": "else",
+          "start": 545.567,
+          "end": 545.976
+        },
+        {
+          "w": "can",
+          "start": 545.976,
+          "end": 546.304
+        },
+        {
+          "w": "happen",
+          "start": 546.304,
+          "end": 546.876
+        },
+        {
+          "w": "in",
+          "start": 546.876,
+          "end": 547.122
+        },
+        {
+          "w": "parallel.",
+          "start": 547.122,
+          "end": 547.94
+        }
+      ]
+    },
+    {
+      "id": "s59",
+      "start": 552.98,
+      "end": 558.98,
+      "channel": "ch0",
+      "text": "One more thing. Do support need to tell customers anything in advance?",
+      "words": [
+        {
+          "w": "One",
+          "start": 552.98,
+          "end": 553.318
+        },
+        {
+          "w": "more",
+          "start": 553.318,
+          "end": 553.741
+        },
+        {
+          "w": "thing.",
+          "start": 553.741,
+          "end": 554.332
+        },
+        {
+          "w": "Do",
+          "start": 554.332,
+          "end": 554.586
+        },
+        {
+          "w": "support",
+          "start": 554.586,
+          "end": 555.262
+        },
+        {
+          "w": "need",
+          "start": 555.262,
+          "end": 555.684
+        },
+        {
+          "w": "to",
+          "start": 555.684,
+          "end": 555.938
+        },
+        {
+          "w": "tell",
+          "start": 555.938,
+          "end": 556.36
+        },
+        {
+          "w": "customers",
+          "start": 556.36,
+          "end": 557.205
+        },
+        {
+          "w": "anything",
+          "start": 557.205,
+          "end": 557.966
+        },
+        {
+          "w": "in",
+          "start": 557.966,
+          "end": 558.219
+        },
+        {
+          "w": "advance?",
+          "start": 558.219,
+          "end": 558.98
+        }
+      ]
+    },
+    {
+      "id": "s60",
+      "start": 560.87,
+      "end": 569.37,
+      "channel": "ch1",
+      "text": "Only if we slip the date publicly. Internally I will send a note to the sales channel.",
+      "words": [
+        {
+          "w": "Only",
+          "start": 560.87,
+          "end": 561.359
+        },
+        {
+          "w": "if",
+          "start": 561.359,
+          "end": 561.652
+        },
+        {
+          "w": "we",
+          "start": 561.652,
+          "end": 561.945
+        },
+        {
+          "w": "slip",
+          "start": 561.945,
+          "end": 562.433
+        },
+        {
+          "w": "the",
+          "start": 562.433,
+          "end": 562.824
+        },
+        {
+          "w": "date",
+          "start": 562.824,
+          "end": 563.313
+        },
+        {
+          "w": "publicly.",
+          "start": 563.313,
+          "end": 564.29
+        },
+        {
+          "w": "Internally",
+          "start": 564.29,
+          "end": 565.364
+        },
+        {
+          "w": "I",
+          "start": 565.364,
+          "end": 565.56
+        },
+        {
+          "w": "will",
+          "start": 565.56,
+          "end": 566.048
+        },
+        {
+          "w": "send",
+          "start": 566.048,
+          "end": 566.537
+        },
+        {
+          "w": "a",
+          "start": 566.537,
+          "end": 566.732
+        },
+        {
+          "w": "note",
+          "start": 566.732,
+          "end": 567.221
+        },
+        {
+          "w": "to",
+          "start": 567.221,
+          "end": 567.514
+        },
+        {
+          "w": "the",
+          "start": 567.514,
+          "end": 567.904
+        },
+        {
+          "w": "sales",
+          "start": 567.904,
+          "end": 568.491
+        },
+        {
+          "w": "channel.",
+          "start": 568.491,
+          "end": 569.37
+        }
+      ]
+    },
+    {
+      "id": "s61",
+      "start": 573.15,
+      "end": 578.65,
+      "channel": "ch0",
+      "text": "Let us do that once the freeze is confirmed, not before.",
+      "words": [
+        {
+          "w": "Let",
+          "start": 573.15,
+          "end": 573.536
+        },
+        {
+          "w": "us",
+          "start": 573.536,
+          "end": 573.825
+        },
+        {
+          "w": "do",
+          "start": 573.825,
+          "end": 574.115
+        },
+        {
+          "w": "that",
+          "start": 574.115,
+          "end": 574.597
+        },
+        {
+          "w": "once",
+          "start": 574.597,
+          "end": 575.08
+        },
+        {
+          "w": "the",
+          "start": 575.08,
+          "end": 575.466
+        },
+        {
+          "w": "freeze",
+          "start": 575.466,
+          "end": 576.141
+        },
+        {
+          "w": "is",
+          "start": 576.141,
+          "end": 576.431
+        },
+        {
+          "w": "confirmed,",
+          "start": 576.431,
+          "end": 577.492
+        },
+        {
+          "w": "not",
+          "start": 577.492,
+          "end": 577.878
+        },
+        {
+          "w": "before.",
+          "start": 577.878,
+          "end": 578.65
+        }
+      ]
+    },
+    {
+      "id": "s62",
+      "start": 581.17,
+      "end": 587.17,
+      "channel": "ch1",
+      "text": "Agreed. I will draft it and hold it until you say go.",
+      "words": [
+        {
+          "w": "Agreed.",
+          "start": 581.17,
+          "end": 582.059
+        },
+        {
+          "w": "I",
+          "start": 582.059,
+          "end": 582.281
+        },
+        {
+          "w": "will",
+          "start": 582.281,
+          "end": 582.837
+        },
+        {
+          "w": "draft",
+          "start": 582.837,
+          "end": 583.503
+        },
+        {
+          "w": "it",
+          "start": 583.503,
+          "end": 583.837
+        },
+        {
+          "w": "and",
+          "start": 583.837,
+          "end": 584.281
+        },
+        {
+          "w": "hold",
+          "start": 584.281,
+          "end": 584.837
+        },
+        {
+          "w": "it",
+          "start": 584.837,
+          "end": 585.17
+        },
+        {
+          "w": "until",
+          "start": 585.17,
+          "end": 585.837
+        },
+        {
+          "w": "you",
+          "start": 585.837,
+          "end": 586.281
+        },
+        {
+          "w": "say",
+          "start": 586.281,
+          "end": 586.726
+        },
+        {
+          "w": "go.",
+          "start": 586.726,
+          "end": 587.17
+        }
+      ]
+    },
+    {
+      "id": "s63",
+      "start": 591.895,
+      "end": 597.395,
+      "channel": "ch0",
+      "text": "Perfect. Let us regroup Thursday. I will send the calendar hold.",
+      "words": [
+        {
+          "w": "Perfect.",
+          "start": 591.895,
+          "end": 592.657
+        },
+        {
+          "w": "Let",
+          "start": 592.657,
+          "end": 592.995
+        },
+        {
+          "w": "us",
+          "start": 592.995,
+          "end": 593.249
+        },
+        {
+          "w": "regroup",
+          "start": 593.249,
+          "end": 593.926
+        },
+        {
+          "w": "Thursday.",
+          "start": 593.926,
+          "end": 594.772
+        },
+        {
+          "w": "I",
+          "start": 594.772,
+          "end": 594.941
+        },
+        {
+          "w": "will",
+          "start": 594.941,
+          "end": 595.364
+        },
+        {
+          "w": "send",
+          "start": 595.364,
+          "end": 595.787
+        },
+        {
+          "w": "the",
+          "start": 595.787,
+          "end": 596.126
+        },
+        {
+          "w": "calendar",
+          "start": 596.126,
+          "end": 596.887
+        },
+        {
+          "w": "hold.",
+          "start": 596.887,
+          "end": 597.395
+        }
+      ]
+    },
+    {
+      "id": "s64",
+      "start": 599.285,
+      "end": 601.285,
+      "channel": "ch1",
+      "text": "Sounds good. Thanks everyone.",
+      "words": [
+        {
+          "w": "Sounds",
+          "start": 599.285,
+          "end": 599.752
+        },
+        {
+          "w": "good.",
+          "start": 599.752,
+          "end": 600.152
+        },
+        {
+          "w": "Thanks",
+          "start": 600.152,
+          "end": 600.618
+        },
+        {
+          "w": "everyone.",
+          "start": 600.618,
+          "end": 601.285
+        }
+      ]
+    }
+  ]
+}

@@ -17,3 +17,23 @@ This is the first slice because it carries the project's biggest unknown — whe
 - [ ] Total generation time for the 10-minute fixture is printed
 
 Notes: the section boundaries come from the model, but the transcript text inside each section is cut verbatim by the renderer — the model never rewrites what people said.
+
+## Comments
+
+**2026-11-11 — deterministic core landed, model still missing.**
+
+Done: transcript schema with precise validation errors, paragraph assembly,
+section normalisation (gaps closed, overlaps clipped, backwards ranges dropped),
+markdown rendering with a verbatim transcript section, and a CLI. `FakeLLM` sits
+behind the adapter seam. 38 tests, mypy clean, ruff clean. The 10-minute fixture
+in `fixtures/` exercises the whole path.
+
+Still open, and it is the half that matters: `LlamaCppLLM.draft` — the llama.cpp
+invocation, the GBNF grammar, and the model fetch. Until that exists, `--llm llama`
+exits with status 3.
+
+**What this ticket has actually proven:** the renderer, the schema and the
+section-tiling are correct. **What it has not proven:** that a small local model
+can write a note worth reading. The "At a glance" bullets above the fold are
+currently arbitrary lines from the fake, not summaries. Do not read the demo note
+as evidence of note quality.

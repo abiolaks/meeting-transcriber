@@ -1,7 +1,9 @@
 # Local Meeting Transcriber
 
-**Status: specification only. No code yet.** Phase 0 (hardware validation) is the
-next step — see [SPEC.md](SPEC.md) §17.
+**Status: early implementation.** The note pipeline runs end to end against a
+fixture transcript with a fake model; speech recognition and the real local model
+are not built yet. Phase 0 hardware validation is still outstanding — see
+[SPEC.md](SPEC.md) §17.
 
 A background app that records both sides of a remote meeting (Zoom, Teams, Google
 Meet) on one laptop, transcribes it on-device, and produces a readable,
