@@ -1,93 +1,248 @@
 # Local Meeting Transcriber
 
-**Status: early implementation.** The note pipeline runs end to end against a
-fixture transcript with a fake model; speech recognition and the real local model
-are not built yet. Phase 0 hardware validation is still outstanding — see
-[SPEC.md](SPEC.md) §17.
-
-A background app that records both sides of a remote meeting (Zoom, Teams, Google
-Meet) on one laptop, transcribes it on-device, and produces a readable,
-well-sectioned note: what was discussed, what was decided, and what needs doing,
-by whom, by when.
+Records both sides of a remote meeting on one laptop, transcribes it offline, and
+writes a note: what was discussed, what was decided, and what needs doing, by
+whom, by when.
 
 No cloud. No account. No network at runtime.
 
----
-
-## The constraint that shapes the design
-
-The target machine is a **2017 Intel Core i7-8650U** — 4 cores / 8 threads, 15 W,
-16 GB RAM, no usable GPU. That is roughly a quarter of the sustained compute of a
-current laptop, and it is what the whole design is built around.
-
-Consequences, all argued in the spec:
-
-- `large-v3-turbo` is **not viable** — its large encoder dominates runtime and
-  doesn't shrink. `small.en` is the ceiling.
-- A one-hour meeting yields its note **35–45 minutes after you press stop**, not
-  in two minutes.
-- A 3B LLM with a hard **1,500 output-token budget** does the summarising.
-- CPU clocks are the binding constraint, not RAM. The 2112 MHz figure the machine
-  reports is nominal, not a cap — it boosts to ~4.1 GHz. Measured, not assumed.
-
-If those numbers are unacceptable, the answer is different hardware or a server —
-see [DEPLOYMENT.md](DEPLOYMENT.md), not a bigger model.
+**Status: early implementation.** The whole path runs end to end on macOS. The
+Windows capture path is written but has never executed on Windows — see
+[What is not proven](#what-is-not-proven) before you rely on it.
 
 ---
 
-## Documents
+## Contents
 
-| File | What it covers |
-|---|---|
-| [SPEC.md](SPEC.md) | The product spec: architecture, capture, ASR, synthesis, output format, storage, packaging, phases |
-| [TUNING.md](TUNING.md) | How to make it fast and accurate on *this* laptop: every knob, ranked, with the measurement protocol |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Where the compute runs — local, thin-agent-plus-server, or browser-only — and what "free hosting" actually gets you |
-| [DEVELOPMENT.md](DEVELOPMENT.md) | Develop on Mac, ship on Windows: what each machine can and cannot prove, and how packaging works |
-| [bench/](bench/) | Phase 0: capture smoke test, benchmark kit, CPU power diagnostic, results template |
-
----
-
-## Core design decisions
-
-- **Audio is the source of truth.** Every stage is re-runnable from the recording,
-  so a slow CPU costs time, never data.
-- **The two channels are transcribed separately, never mixed.** The loopback is a
-  decoded digital stream — the cleanest audio in the system — and mixing the mic
-  into it would throw that advantage away.
-- **The LLM decides where section cuts go; it never rewrites the transcript.** The
-  note is readable at the top and auditable at the bottom.
-- **Every action item must quote the transcript.** Anything that fails
-  verification is demoted to "Unverified", never silently kept.
-- **Precision over recall on owners.** An invented owner destroys trust faster
-  than a missed action.
-- **The recording path is never blocked, preempted, or degraded by ML work.**
-
-## Non-goals for v1
-
-Live summarisation · shared-screen understanding · calendar and platform
-integrations · cloud sync · languages other than English · mobile · voice-based
-speaker identification · auto-starting on meeting detection.
+- [What it does](#what-it-does)
+- [Requirements](#requirements)
+- [Setup on Windows](#setup-on-windows)
+- [Setup on macOS / Linux (development)](#setup-on-macos--linux-development)
+- [Running it](#running-it)
+- [Commands](#commands)
+- [How it works](#how-it-works)
+- [Tests](#tests)
+- [What is not proven](#what-is-not-proven)
+- [Documentation](#documentation)
 
 ---
 
-## Getting started (Phase 0)
+## What it does
 
-Phase 0 exists to answer one question: **is this laptop fast enough to be worth
-building on?** It takes an hour or two, not a week.
-
-```powershell
-cd bench
-powershell -ExecutionPolicy Bypass -File .\check-power.ps1   # is the CPU capped?
+```
+ microphone ─┐
+             ├─ two WAVs ─ whisper.cpp ─ merge ─ note ─ note.md
+ loopback  ──┘   (separate)   (per channel)  (timeline)  (3B LLM)
 ```
 
-Then follow [bench/README.md](bench/README.md): assemble whisper.cpp and
-llama.cpp, record a real meeting, and measure.
+The two channels are transcribed **separately and never mixed**. The loopback
+channel is a decoded digital stream — no room acoustics, no echo — so keeping it
+apart from your microphone gives cleaner remote audio, free speaker attribution,
+and a way to detect the speakerphone case.
 
-The gates are in [SPEC.md](SPEC.md) §17. If gate 1 fails — `small.en` cannot
-process a 60-minute file in under 35 minutes — the honest conclusion is that the
-spec is right and the machine is wrong.
+Every action item in the note must quote the transcript verbatim. Anything the
+model reports that cannot be found in the transcript is demoted to an
+**Unverified** section rather than being silently kept.
 
 ---
+
+## Requirements
+
+| | |
+|---|---|
+| OS | Windows 10/11 x64 (primary), macOS (development), Linux (untested) |
+| CPU | x86-64 with AVX2. 4 cores minimum; 15 W laptops work but are slow |
+| RAM | 16 GB recommended, 8 GB workable |
+| Disk | ~2.5 GB for models and binaries |
+| Software | Python 3.11+, ffmpeg |
+| Audio | Headphones. On laptop speakers, echo detection has to clean up after you |
+
+**Expected speed on the target hardware** (2017 i7-8650U, 15 W): roughly 25–40
+minutes to process a 60-minute meeting. On an M-series Mac it is about 5× faster.
+These are estimates, not measurements — see [bench/](bench/).
+
+---
+
+## Setup on Windows
+
+```cmd
+git clone https://github.com/abiolaks/meeting-transcriber
+cd meeting-transcriber
+
+winget install Python.Python.3.12
+winget install Gyan.FFmpeg
+
+powershell -ExecutionPolicy Bypass -File scripts\setup-windows.ps1
+```
+
+The script downloads the native binaries (whisper.cpp, llama.cpp) and the models
+into `vendor\` and `models\`, installs the `soundcard` audio package, and prints
+the exact run commands with the resolved binary paths. It is safe to re-run and
+skips anything already present. Use `-SkipModels` to defer the ~2.3 GB download.
+
+Nothing is installed system-wide; everything lives inside the repo directory.
+
+### Check it can hear a meeting
+
+Before anything else, with a meeting running and headphones on:
+
+```cmd
+py -3 -c "import soundcard as sc; s=sc.default_speaker(); print(repr(s.name)); print(sc.get_microphone(id=str(s.name), include_loopback=True))"
+```
+
+If this raises, capture will not work on that machine and the rest is moot. This
+is the one part of the project that cannot be tested off Windows.
+
+---
+
+## Setup on macOS / Linux (development)
+
+macOS is what the project was built on. There is no setup script; build whisper.cpp
+and fetch llama.cpp by hand:
+
+```bash
+git clone https://github.com/ggml-org/whisper.cpp vendor/whisper.cpp
+cd vendor/whisper.cpp
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j --target whisper-cli
+cd ../..
+
+mkdir -p models vendor
+curl -L -o models/ggml-small.en-q5_1.bin \
+  https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en-q5_1.bin
+curl -L -o models/qwen2.5-3b-instruct-q4_k_m.gguf \
+  https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf
+```
+
+For llama.cpp, take `llama-b####-bin-macos-arm64.tar.gz` from
+[the releases page](https://github.com/ggml-org/llama.cpp/releases).
+
+Capture on macOS needs ScreenCaptureKit (macOS 13+) or a virtual loopback device.
+It is not implemented yet — only transcription of existing files is.
+
+---
+
+## Running it
+
+Set `PYTHONPATH` once per shell:
+
+```cmd
+:: Windows
+set PYTHONPATH=src
+```
+
+```bash
+# macOS / Linux
+export PYTHONPATH=src
+```
+
+### 1. Record a meeting (Windows)
+
+```cmd
+py -3 -m mt capture --seconds 3600 --out-dir sessions\q3-sync --levels
+```
+
+Writes `loopback.wav` and `mic.wav`. `--levels` shows a live per-channel meter so
+silence is visible during the meeting, not discovered after it.
+
+### 2. Turn it into a note
+
+```cmd
+py -3 -m mt run sessions\q3-sync\mic.wav sessions\q3-sync\loopback.wav ^
+  --asr-model models\ggml-small.en-q5_1.bin ^
+  --asr-binary vendor\whisper\whisper-cli.exe ^
+  --model models\qwen2.5-3b-instruct-q4_k_m.gguf ^
+  --binary vendor\llama\llama-cli.exe ^
+  --out sessions\q3-sync\note.md
+```
+
+Prints stage timings and the number of echo duplicates removed. If any action
+item could not be traced to the transcript, it says so on stderr and lists it
+under **Unverified** in the note.
+
+Add `--llm fake` to exercise the pipeline without a model — useful for checking
+wiring, useless for note quality.
+
+---
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `mt capture --seconds N --out-dir DIR [--levels]` | Record loopback + mic (Windows only) |
+| `mt run MIC REMOTE --asr-model M --model G --out note.md` | Whole path: two WAVs → note |
+| `mt transcribe AUDIO --model M [--out t.json]` | One WAV → transcript JSON |
+| `mt merge MIC.json REMOTE.json --out merged.json` | Two transcripts → one timeline |
+| `mt note TRANSCRIPT.json [--out note.md]` | Transcript → note, no audio |
+| `mt eval PRED.json --gold GOLD.json` | WER and action precision/recall |
+
+`mt transcribe` takes `--channel`/`--label` so each side can be labelled; by
+default it writes `ch0`/`You`. Use `--channel ch1 --label Remote` for the loopback
+side when transcribing by hand.
+
+---
+
+## How it works
+
+1. **Capture** — loopback and mic to two separate WAVs (never mixed).
+2. **Transcribe** — whisper.cpp per channel, word-level timestamps.
+3. **Merge** — one timeline, speaker labels preserved, speakerphone echo counted
+   once (the loopback copy wins).
+4. **Note** — the model proposes section boundaries and extracts commitments; the
+   renderer cuts the *verbatim* transcript at those boundaries, so the note is
+   readable at the top and auditable at the bottom.
+5. **Verify** — every action item must quote the transcript. Failures are demoted,
+   not silently dropped.
+
+Design docs: [SPEC.md](SPEC.md) for the reasoning, [DEVELOPMENT.md](DEVELOPMENT.md)
+for the Mac-vs-Windows split, [docs/transcript-format.md](docs/transcript-format.md)
+for the data contract.
+
+---
+
+## Tests
+
+```bash
+python3 -m pytest -q          # 127 tests, 2 skipped (need real audio/models)
+mypy
+ruff check src tests tools
+```
+
+Integration tests that need a model skip unless `MT_LLAMA_MODEL`,
+`MT_WHISPER_MODEL` and `MT_WHISPER_BIN` are set.
+
+---
+
+## What is not proven
+
+Read this before trusting the output.
+
+- **Capture has never run on Windows.** WASAPI loopback is unverified. It is the
+  first thing to test and the most likely to fail.
+- **No real meeting has been processed.** Every result so far is synthetic speech,
+  which has no accents, crosstalk or disfluencies.
+- **No quality baseline exists.** There is no gold set, so "the note looks good"
+  is an impression, not a measurement.
+- **The model is flaky.** A 3B can fail to emit valid JSON; when that happens the
+  run fails with no note rather than writing a wrong one.
+- **Speaker attribution is weak.** Action items often come back owned by
+  "Remote" even when you committed to them.
+- **Not implemented**: `mt models fetch`, macOS capture, tray UI, installer,
+  code signing.
+
+---
+
+## Documentation
+
+| File | |
+|---|---|
+| [SPEC.md](SPEC.md) | Product spec, architecture, performance budget, phases |
+| [TUNING.md](TUNING.md) | Every speed/quality knob, ranked, with a measurement protocol |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Local vs thin-agent-plus-server vs browser-only |
+| [DEVELOPMENT.md](DEVELOPMENT.md) | Develop on Mac, ship on Windows |
+| [docs/windows-testing.md](docs/windows-testing.md) | Step-by-step validation on the target laptop |
+| [bench/](bench/) | Hardware benchmark kit and results template |
+| [.scratch/](.scratch/meeting-transcriber/spec.md) | Implementation tickets and their state |
 
 ## Licence
 
